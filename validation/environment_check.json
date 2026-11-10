@@ -1,0 +1,6 @@
+{
+  "checked_at_hong_kong": "2026-11-08T03:55:47.464341+08:00",
+  "sas_executable_on_PATH": null,
+  "sas_execution_performed": false,
+  "reason": "No SAS executable on PATH and no configured SAS service connector was available."
+}

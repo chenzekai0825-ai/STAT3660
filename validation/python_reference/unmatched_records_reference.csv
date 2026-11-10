@@ -1,0 +1,31 @@
+iso3,country_name,year,is_aggregate,indicator_merge,metadata_merge
+AFR,Africa,2023,1,,right_only
+BEA,East Asia & Pacific (IBRD-only countries),2023,1,,right_only
+BEC,Europe & Central Asia (IBRD-only countries),2023,1,,right_only
+BHI,IBRD countries classified as high income,2023,1,,right_only
+BLA,Latin America & the Caribbean (IBRD-only countries),2023,1,,right_only
+BMN,"Middle East, North Africa, Afghanistan & Pakistan (IBRD only)",2023,1,,right_only
+BSS,Sub-Saharan Africa (IBRD-only countries),2023,1,,right_only
+CAA,Sub-Saharan Africa (IFC classification),2023,1,,right_only
+CEA,East Asia and the Pacific (IFC classification),2023,1,,right_only
+CEU,Europe and Central Asia (IFC classification),2023,1,,right_only
+CLA,Latin America and the Caribbean (IFC classification),2023,1,,right_only
+CME,Middle East and North Africa (IFC classification),2023,1,,right_only
+CSA,South Asia (IFC classification),2023,1,,right_only
+DEA,East Asia & Pacific (IDA-eligible countries),2023,1,,right_only
+DEC,Europe & Central Asia (IDA-eligible countries),2023,1,,right_only
+DLA,Latin America & the Caribbean (IDA-eligible countries),2023,1,,right_only
+DMN,"Middle East, North Africa, Afghanistan & Pakistan (IDA total)",2023,1,,right_only
+DNS,IDA countries in Sub-Saharan Africa not classified as fragile situations ,2023,1,,right_only
+DSA,South Asia (IDA-eligible countries),2023,1,,right_only
+DSF,IDA countries in Sub-Saharan Africa classified as fragile situations ,2023,1,,right_only
+DSS,Sub-Saharan Africa (IDA-eligible countries),2023,1,,right_only
+FXS,"IDA countries classified as fragile situations, excluding Sub-Saharan Africa",2023,1,,right_only
+IBB,"IBRD, including blend",2023,1,,right_only
+MDE,Middle East (developing only),2023,1,,right_only
+NAF,North Africa,2023,1,,right_only
+NRS,Non-resource rich Sub-Saharan Africa countries,2023,1,,right_only
+NXS,"IDA countries not classified as fragile situations, excluding Sub-Saharan Africa",2023,1,,right_only
+RRS,Resource rich Sub-Saharan Africa countries,2023,1,,right_only
+SXZ,Sub-Saharan Africa excluding South Africa,2023,1,,right_only
+XZN,Sub-Saharan Africa excluding South Africa and Nigeria,2023,1,,right_only

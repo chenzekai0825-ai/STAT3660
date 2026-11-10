@@ -1,0 +1,4 @@
+test,statistic,p_value
+White LM heteroskedasticity (Python; not SAS SPEC),3.7966869147401878,0.14981659134796613
+Koenker-Breusch-Pagan LM (Python),1.9767083715724627,0.15973760286763261
+Shapiro-Wilk residual normality (Python),0.96399510385386333,6.2847039667624237e-05

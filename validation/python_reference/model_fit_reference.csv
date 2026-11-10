@@ -1,0 +1,2 @@
+n,df_model,df_resid,r_squared,adjusted_r_squared,rmse,ols_f,ols_f_p,intercept,slope,years_per_doubling_gdp,inference
+197,1,195,0.74191313392441627,0.74058961153428515,3.6133867597002576,560.55956397599857,2.9349554703468718e-59,22.567092901440649,5.2671734350830937,3.6509264160480885,Unweighted cross-sectional association; no causal interpretation

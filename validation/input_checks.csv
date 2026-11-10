@@ -1,0 +1,45 @@
+check,status,detail
+countries.json: SHA256,PASS,c9acf3932785191a649cbc04c3056af4cf64a236e5c3b49d49be25ddb0440bce
+countries.json: bytes,PASS,113954
+life_2023.json: SHA256,PASS,2c3a31d481a2f594ae78439e2b778fdf6c7b8d23ad29fcf975c95b0d247957f4
+life_2023.json: bytes,PASS,60838
+gdp_2023.json: SHA256,PASS,62ca2476caa99207eea22378b5b1cda6a27d0193b5b9b65489ac4eefef1445e7
+gdp_2023.json: bytes,PASS,66217
+life_metadata.json: SHA256,PASS,a39cb6fddfbbb953053690366243dffe77a266c4deae79c46ce5a06da9f5fc31
+life_metadata.json: bytes,PASS,969
+gdp_metadata.json: SHA256,PASS,55af4b25be9dc57c2865bc4a208710e7405b00306f8381038d884841d3b1e686
+gdp_metadata.json: bytes,PASS,2444
+countries.json: complete API page,PASS,"rows=296, total=296, pages=1"
+country metadata keys unique,PASS,296
+XLSX sheet schema,PASS,['Economies']
+XLSX header,PASS,"('iso3', 'country_name', 'region_id', 'region', 'income_group', 'is_aggregate')"
+XLSX rows and keys,PASS,296
+XLSX all cells equal source,PASS,296 rows x 6 fields; exact text and numeric 0/1
+XLSX numeric flag,PASS,All aggregate flags numeric
+CSV exact schema,PASS,"['iso3', 'year', 'period_start_raw', 'life_raw']"
+CSV date parse,PASS,"266 ISO dates; annual period marker, not measurement day"
+DAT record widths,PASS,"266 records, exactly 44 ASCII bytes each"
+DAT separator positions,PASS,"Blanks in columns 4, 9, 20"
+DAT date parse,PASS,266 valid period-start markers
+life_2023.json: complete API page,PASS,"rows=266, total=266, pages=1"
+life_2023.json: input keys,PASS,"266 unique (WB code, year) keys"
+life_2023.json: exact values,PASS,"266 values preserved; null stays missing, no zero replacement"
+gdp_2023.json: complete API page,PASS,"rows=266, total=266, pages=1"
+gdp_2023.json: input keys,PASS,"266 unique (WB code, year) keys"
+gdp_2023.json: exact values,PASS,"266 values preserved; null stays missing, no zero replacement"
+life_metadata.json: complete API page,PASS,"rows=1, total=1, pages=1"
+gdp_metadata.json: complete API page,PASS,"rows=1, total=1, pages=1"
+SP.DYN.LE00.IN: full long field,PASS,Full content compared to normalized raw source
+SP.DYN.LE00.IN: length and suffix,PASS,186 UTF-8 bytes; suffix equals source
+NY.GDP.PCAP.PP.KD: full long field,PASS,Full content compared to normalized raw source
+NY.GDP.PCAP.PP.KD: length and suffix,PASS,1342 UTF-8 bytes; suffix equals source
+indicator merge,PASS,266 both; no unmatched indicator keys
+metadata join row accounting,PASS,"296 full rows; 266 both, 30 metadata only, 0 indicators only"
+unmatched rows are aggregates,PASS,All 30 metadata-only rows are aggregates
+all analysis years,PASS,2023 only
+plausibility: life expectancy,PASS,Observed life expectancy >0 and <=120 years
+plausibility: GDP,PASS,All observed GDP values >0
+all counts equal frozen manifest,PASS,"{'metadata_rows': 296, 'life_rows': 266, 'gdp_rows': 266, 'economies': 217, 'life_missing': 0, 'gdp_missing': 20, 'complete_cases': 197, 'max_note_bytes': 1342}"
+reference CSV reread,PASS,217 exported rows
+reference numeric round trip,PASS,All exported numeric fields recover identical binary64 values; missing values preserved
+model reference sample,PASS,197 complete cases and finite coefficients

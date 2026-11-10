@@ -1,0 +1,80 @@
+{
+  "downloaded_at_hong_kong": "2026-11-08T03:47:12+08:00",
+  "study_year": 2023,
+  "sources": [
+    {
+      "file": "countries.json",
+      "url": "https://api.worldbank.org/v2/country?format=json&per_page=400",
+      "bytes": 113954,
+      "sha256": "c9acf3932785191a649cbc04c3056af4cf64a236e5c3b49d49be25ddb0440bce",
+      "api_header": {
+        "page": 1,
+        "pages": 1,
+        "per_page": "400",
+        "total": 296
+      }
+    },
+    {
+      "file": "life_2023.json",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?date=2023&format=json&per_page=400&source=2",
+      "bytes": 60838,
+      "sha256": "2c3a31d481a2f594ae78439e2b778fdf6c7b8d23ad29fcf975c95b0d247957f4",
+      "api_header": {
+        "page": 1,
+        "pages": 1,
+        "per_page": 400,
+        "total": 266,
+        "sourceid": "2",
+        "lastupdated": "2026-10-08"
+      }
+    },
+    {
+      "file": "gdp_2023.json",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.PP.KD?date=2023&format=json&per_page=400&source=2",
+      "bytes": 66217,
+      "sha256": "62ca2476caa99207eea22378b5b1cda6a27d0193b5b9b65489ac4eefef1445e7",
+      "api_header": {
+        "page": 1,
+        "pages": 1,
+        "per_page": 400,
+        "total": 266,
+        "sourceid": "2",
+        "lastupdated": "2026-10-08"
+      }
+    },
+    {
+      "file": "life_metadata.json",
+      "url": "https://api.worldbank.org/v2/indicator/SP.DYN.LE00.IN?format=json&source=2",
+      "bytes": 969,
+      "sha256": "a39cb6fddfbbb953053690366243dffe77a266c4deae79c46ce5a06da9f5fc31",
+      "api_header": {
+        "page": 1,
+        "pages": 1,
+        "per_page": "50",
+        "total": 1
+      }
+    },
+    {
+      "file": "gdp_metadata.json",
+      "url": "https://api.worldbank.org/v2/indicator/NY.GDP.PCAP.PP.KD?format=json&source=2",
+      "bytes": 2444,
+      "sha256": "55af4b25be9dc57c2865bc4a208710e7405b00306f8381038d884841d3b1e686",
+      "api_header": {
+        "page": 1,
+        "pages": 1,
+        "per_page": "50",
+        "total": 1
+      }
+    }
+  ],
+  "expected": {
+    "metadata_rows": 296,
+    "life_rows": 266,
+    "gdp_rows": 266,
+    "economies": 217,
+    "life_missing": 0,
+    "gdp_missing": 20,
+    "complete_cases": 197,
+    "max_note_bytes": 1342
+  }
+}

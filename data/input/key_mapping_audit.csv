@@ -1,0 +1,11 @@
+source_file,api_iso2,resolved_wb_code,source_name
+life_2023.json,XD,HIC,High income
+life_2023.json,XM,LIC,Low income
+life_2023.json,XN,LMC,Lower middle income
+life_2023.json,XY,INX,Not classified
+life_2023.json,XT,UMC,Upper middle income
+gdp_2023.json,XD,HIC,High income
+gdp_2023.json,XM,LIC,Low income
+gdp_2023.json,XN,LMC,Lower middle income
+gdp_2023.json,XY,INX,Not classified
+gdp_2023.json,XT,UMC,Upper middle income

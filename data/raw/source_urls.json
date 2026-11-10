@@ -1,0 +1,7 @@
+{
+  "countries.json": "https://api.worldbank.org/v2/country?format=json&per_page=400",
+  "life_2023.json": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?date=2023&format=json&per_page=400&source=2",
+  "gdp_2023.json": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.PP.KD?date=2023&format=json&per_page=400&source=2",
+  "life_metadata.json": "https://api.worldbank.org/v2/indicator/SP.DYN.LE00.IN?format=json&source=2",
+  "gdp_metadata.json": "https://api.worldbank.org/v2/indicator/NY.GDP.PCAP.PP.KD?format=json&source=2"
+}

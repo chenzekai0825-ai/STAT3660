@@ -1,0 +1,12 @@
+{
+  "python_script_syntax": "PASS",
+  "offline_input_rebuild_identical": "PASS",
+  "checked_files": [
+    "data/input/key_mapping_audit.csv",
+    "data/input/indicator_notes.csv",
+    "data/input/life_expectancy.csv",
+    "data/input/gdp_ppp.dat",
+    "data/raw/manifest.json",
+    "sas/snapshot_expectations.sas"
+  ]
+}
