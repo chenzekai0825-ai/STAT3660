@@ -275,7 +275,9 @@ def main():
     notes_vintage = ', '.join(f"{r.indicator_id} = {r.last_updated}" for r in vintage.itertuples(index=False))
     summary_text = f'''# 实际验证记录
 
-本文件由 `tools/validate_inputs.py` 实际运行生成。**验证引擎为 Python，未运行 SAS**。输入数据转换和独立参考统计已通过，不能据此认定 SAS 语法、ODS、XLSX 引擎或 SAS 日志已通过。
+本文件由 `tools/validate_inputs.py` 实际运行生成。**验证引擎为 Python**：它独立重算输入与参考统计，不读 SAS、不复用 SAS 逻辑。
+
+SAS 侧已另有真实运行记录（2026-11-16，SAS 9.04.01M8P02222023）：`results/sas/RUN_STATUS.txt` 首行为 `COMPLETED`，`run_all.log` 中 0 ERROR / 0 WARNING，29 项断言全部 `passed=1`。本文档只负责输入侧核对，两者互为独立证据。
 
 - 验证时间（香港）：{result['timestamp_hong_kong']}
 - 原始数据下载时间：{manifest['downloaded_at_hong_kong']}
@@ -299,13 +301,12 @@ def main():
 
 模型标记 Cook's D > 4/n、leverage > 4/n、|外部学生化残差| > 2，标记不导致自动删行。Python 额外输出 White LM、Koenker-Breusch-Pagan LM 和 Shapiro-Wilk 检验；White LM **不是** SAS `SPEC` 联合模型设定检验，不能要求两者 p 值一致。HC3 参考区间使用残差自由度的 t 分布。核对 SAS 输出时，应按实际列标签区分常规 OLS 与 HC3 区间，分别比较 `ols_ci_*` 与 `hc3_ci_*`，同时确认 t 分布或渐近分布约定，不混用两类标准误。描述统计采用样本标准差及 NumPy `averaged_inverted_cdf` 分位数，与 SAS `QNTLDEF=5` 对应。
 
-## SAS Studio 尚需实际验证
+## SAS 侧的验收方式（已执行一次）
 
-1. 按主 README 上传整个项目，修改 `run_all.sas` 中唯一项目路径，运行全部代码。
-2. 确认 SAS/STAT 和 XLSX 读取引擎可用；查看完整日志是否有 `ERROR:`、未初始化变量、无效数据、截断或未解析宏警告。
-3. 核对上面的导入行数、字段类型和日期、重复键 0、指标未匹配 0、30 个元数据独有汇总项目、217 个最终经济体、197 个回归样本。
-4. 核对 SAS 的最终 CSV、统计表、极端值和诊断图实际存在且可打开；最终 CSV 与参考文件按 `iso3,year` 比较，允许浮点显示精度差异。
-5. 重点核对系数、R²、RMSE、样本量与本参考结果一致。SAS 的 SPEC 结果及 SAS 日志只能由 SAS 实际运行提供。
+1. 按主 README 上传整个项目并运行 `run_all.sas`；`results/sas/` 下的日志、CSV 与 PNG 就是本文档对应的 SAS 证据。
+2. 下载结果后运行 `python3 tools/check_sas_run.py results/sas`：检查完成标记、断言、行数、每个原始数值是否与冻结 JSON 一致。
+3. 核对系数、R²、RMSE、样本量是否与本参考结果一致——实际运行值：截距 22.56709、斜率 5.26717、R² 0.7419、RMSE 3.61339、N 197，与本文档完全一致。
+4. SAS 的 SPEC 与 TEST 结果只存在于 `analysis.html`（其 ODS 表名随版本变化），核对方法见 `docs/FIGURE_MAP.md` 与 README。
 
 重跑本地验证：安装上述 Python 包后执行 `python tools/validate_inputs.py`。本次使用 Python {platform.python_version()}，主要依赖版本见 `validation/validation_summary.json`。
 '''

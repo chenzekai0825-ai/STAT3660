@@ -1,0 +1,31 @@
+merge_status,iso3,country_name,region_id,region,income_group,is_aggregate,year,period_start,life_exp,gdp_date,gdp_ppp,has_life_row,has_gdp_row,date_disagreement,has_metadata
+Metadata only,AFR,Africa,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,BEA,East Asia & Pacific (IBRD-only countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,BEC,Europe & Central Asia (IBRD-only countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,BHI,IBRD countries classified as high income,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,BLA,Latin America & the Caribbean (IBRD-only countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,BMN,"Middle East, North Africa, Afghanistan & Pakistan (IBRD only)",NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,BSS,Sub-Saharan Africa (IBRD-only countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,CAA,Sub-Saharan Africa (IFC classification),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,CEA,East Asia and the Pacific (IFC classification),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,CEU,Europe and Central Asia (IFC classification),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,CLA,Latin America and the Caribbean (IFC classification),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,CME,Middle East and North Africa (IFC classification),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,CSA,South Asia (IFC classification),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,DEA,East Asia & Pacific (IDA-eligible countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,DEC,Europe & Central Asia (IDA-eligible countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,DLA,Latin America & the Caribbean (IDA-eligible countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,DMN,"Middle East, North Africa, Afghanistan & Pakistan (IDA total)",NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,DNS,IDA countries in Sub-Saharan Africa not classified as fragile situations,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,DSA,South Asia (IDA-eligible countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,DSF,IDA countries in Sub-Saharan Africa classified as fragile situations,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,DSS,Sub-Saharan Africa (IDA-eligible countries),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,FXS,"IDA countries classified as fragile situations, excluding Sub-Saharan Africa",NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,IBB,"IBRD, including blend",NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,MDE,Middle East (developing only),NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,NAF,North Africa,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,NRS,Non-resource rich Sub-Saharan Africa countries,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,NXS,"IDA countries not classified as fragile situations, excluding Sub-Saharan Africa",NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,RRS,Resource rich Sub-Saharan Africa countries,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,SXZ,Sub-Saharan Africa excluding South Africa,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1
+Metadata only,XZN,Sub-Saharan Africa excluding South Africa and Nigeria,NA,Aggregates,Aggregates,1,2023,2023-01-01,,,,0,0,0,1

@@ -1,0 +1,2 @@
+Model,Test,Dependent,DF,ChiSq,ProbChiSq,HCCMethod
+MODEL1,income_association,life_exp,1,625.07,<.0001,HC3

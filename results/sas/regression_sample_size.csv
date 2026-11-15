@@ -1,0 +1,3 @@
+Model,Dependent,Label,N,NObsRead,NObsUsed,SumFreqsRead,SumFreqsUsed,NObsMiss
+MODEL1,life_exp,读取的观测数,197,197,197,197,197,0
+MODEL1,life_exp,使用的观测数,197,197,197,197,197,0

@@ -45,7 +45,11 @@
 | `docs/REPORT_DRAFT.md` | 15 页报告骨架（按评分表的六节结构） |
 | `docs/PPT_OUTLINE.md` | 10 分钟汇报的 12 页大纲与分工，数字已填好 |
 | `docs/FIGURE_MAP.md` | 17 张提取图与 7 张报告图的对照表 |
-| `tools/` | 重建输入（openpyxl）、独立验证、下载后 SAS 输出验收、从 HTML 提取图 |
+| `docs/STAT3660_Report.docx` | **15 页书面报告（英文，7 图 9 表，数字全部来自身 SAS 输出）** |
+| `docs/STAT3660_Slides.pptx` | **12 页汇报（英文幻灯片 + 中文讲稿备注，含 7 张图）** |
+| `tools/` | 重建输入、独立验证、SAS 输出验收、提取图，以及生成 docx / pptx |
+| `tools/build_report_docx.py` | 从 `results/sas/` 生成报告 .docx（表格数字读 CSV；§4.3–4.4 的检验统计量 SAS 未导出 CSV，需对照 `analysis.html`） |
+| `tools/build_slides_pptx.py` | 从 `results/sas/` 生成汇报 .pptx |
 
 数据来源及定义：[预期寿命](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)、[人均 GDP PPP（2021 年不变国际元）](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)、[经济体 API](https://api.worldbank.org/v2/country?format=json&per_page=400)。保存的 WDI 返回头显示更新于 **2026-10-08**，下载于 **2026-11-08**；选用固定 2023 年截面，下载日期和文件哈希见 `data/raw/manifest.json`。
 
@@ -89,6 +93,10 @@ python3 tools/prepare_inputs.py     # 从冻结 JSON 重建全部输入（含 op
 python3 tools/validate_inputs.py    # 45 项独立核对 + Python 参考输出
 python3 tools/check_sas_run.py results/sas   # SAS 跑完后验收
 python3 tools/extract_pngs.py results/sas    # 从 analysis.html 提取图（PNG 没落到磁盘时用）
+python3 tools/build_report_docx.py           # 生成 docs/STAT3660_Report.docx
+python3 tools/build_slides_pptx.py           # 生成 docs/STAT3660_Slides.pptx
 ```
+
+> 报告正文与幻灯片用英文：课程材料、评分表与所有 SAS 图表标签都是英文。中文的规划稿仍保留在 `docs/REPORT_DRAFT.md` 与 `docs/PPT_OUTLINE.md`，两份内容一致，只是语言不同。
 
 需要 pandas、numpy、scipy、statsmodels、matplotlib、openpyxl（版本见 `tools/python-reference-versions.txt`）。只有明确需要更新数据时才用 `prepare_inputs.py --download`；刷新后必须重新核对样本与期望行数。

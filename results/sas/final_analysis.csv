@@ -1,0 +1,218 @@
+merge_status,iso3,country_name,region_id,region,income_group,is_aggregate,year,period_start,life_exp,gdp_date,gdp_ppp,has_life_row,has_gdp_row,date_disagreement,has_metadata,exclusion_reason,missing_life,missing_gdp,invalid_life,invalid_gdp,complete_case,log_gdp
+All three matched,ABW,Aruba,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,76.353,2023-01-01,42783.2489072067,1,1,0,1,Included,0,0,0,0,1,10.6639019242877
+All three matched,AFG,Afghanistan,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Low income,0,2023,2023-01-01,66.035,2023-01-01,1983.81261992909,1,1,0,1,Included,0,0,0,0,1,7.59277583778429
+All three matched,AGO,Angola,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,64.617,2023-01-01,8597.53878787554,1,1,0,1,Included,0,0,0,0,1,9.05923125382582
+All three matched,ALB,Albania,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,79.602,2023-01-01,20501.6470726741,1,1,0,1,Included,0,0,0,0,1,9.9282605069075
+All three matched,AND,Andorra,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,84.041,2023-01-01,64631.2963909271,1,1,0,1,Included,0,0,0,0,1,11.0764540367116
+All three matched,ARE,United Arab Emirates,MEA,"Middle East, North Africa, Afghanistan & Pakistan",High income,0,2023,2023-01-01,82.909,2023-01-01,70239.8328337228,1,1,0,1,Included,0,0,0,0,1,11.1596708483762
+All three matched,ARG,Argentina,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,77.395,2023-01-01,27230.3968496682,1,1,0,1,Included,0,0,0,0,1,10.2120891595486
+All three matched,ARM,Armenia,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,77.4658536585366,2023-01-01,19402.7510915578,1,1,0,1,Included,0,0,0,0,1,9.87317014384068
+All three matched,ASM,American Samoa,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,72.852,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,ATG,Antigua and Barbuda,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,77.598,2023-01-01,28712.3970492192,1,1,0,1,Included,0,0,0,0,1,10.2650842614173
+All three matched,AUS,Australia,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,83.0512195121951,2023-01-01,60684.9596204883,1,1,0,1,Included,0,0,0,0,1,11.0134511641449
+All three matched,AUT,Austria,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.7926829268293,2023-01-01,64536.2076307547,1,1,0,1,Included,0,0,0,0,1,11.0749817038974
+All three matched,AZE,Azerbaijan,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,74.429,2023-01-01,21310.7386915022,1,1,0,1,Included,0,0,0,0,1,9.96696638856987
+All three matched,BDI,Burundi,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,63.651,2023-01-01,1033.00937341776,1,1,0,1,Included,0,0,0,0,1,6.940231543055
+All three matched,BEL,Belgium,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,82.4,2023-01-01,63042.0099876309,1,1,0,1,Included,0,0,0,0,1,11.051556608345
+All three matched,BEN,Benin,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,60.774,2023-01-01,3721.21254814808,1,1,0,1,Included,0,0,0,0,1,8.22180484795904
+All three matched,BFA,Burkina Faso,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,61.092,2023-01-01,2486.20669812871,1,1,0,1,Included,0,0,0,0,1,7.81851341347703
+All three matched,BGD,Bangladesh,SAS,South Asia,Lower middle income,0,2023,2023-01-01,74.672,2023-01-01,8242.39798977242,1,1,0,1,Included,0,0,0,0,1,9.0170465987422
+All three matched,BGR,Bulgaria,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,75.7560975609756,2023-01-01,33073.6803093453,1,1,0,1,Included,0,0,0,0,1,10.4064930882429
+All three matched,BHR,Bahrain,MEA,"Middle East, North Africa, Afghanistan & Pakistan",High income,0,2023,2023-01-01,81.284,2023-01-01,57819.9051831242,1,1,0,1,Included,0,0,0,0,1,10.965088375706
+All three matched,BHS,"Bahamas, The",LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,74.552,2023-01-01,35221.2696932313,1,1,0,1,Included,0,0,0,0,1,10.4694054317476
+All three matched,BIH,Bosnia and Herzegovina,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,77.85,2023-01-01,19804.9181465635,1,1,0,1,Included,0,0,0,0,1,9.89368557707921
+All three matched,BLR,Belarus,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,74.1837804878049,2023-01-01,27782.4380139967,1,1,0,1,Included,0,0,0,0,1,10.2321593739404
+All three matched,BLZ,Belize,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,73.566,2023-01-01,12371.0086545348,1,1,0,1,Included,0,0,0,0,1,9.42311100244506
+All three matched,BMU,Bermuda,NAC,North America,High income,0,2023,2023-01-01,82.309,2023-01-01,102268.922803272,1,1,0,1,Included,0,0,0,0,1,11.5353611208734
+All three matched,BOL,Bolivia,LCN,Latin America & Caribbean,Lower middle income,0,2023,2023-01-01,68.581,2023-01-01,11616.1575595159,1,1,0,1,Included,0,0,0,0,1,9.3601523009805
+All three matched,BRA,Brazil,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,75.848,2023-01-01,19079.8122134028,1,1,0,1,Included,0,0,0,0,1,9.856386102889
+All three matched,BRB,Barbados,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,76.178,2023-01-01,20865.0155437147,1,1,0,1,Included,0,0,0,0,1,9.94582913799133
+All three matched,BRN,Brunei Darussalam,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,75.327,2023-01-01,76616.7014884981,1,1,0,1,Included,0,0,0,0,1,11.2465703670603
+All three matched,BTN,Bhutan,SAS,South Asia,Lower middle income,0,2023,2023-01-01,72.975,2023-01-01,14610.2959097837,1,1,0,1,Included,0,0,0,0,1,9.58948175846049
+All three matched,BWA,Botswana,SSF,Sub-Saharan Africa,Upper middle income,0,2023,2023-01-01,69.163,2023-01-01,18932.4802712334,1,1,0,1,Included,0,0,0,0,1,9.84863425892925
+All three matched,CAF,Central African Republic,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,57.408,2023-01-01,1132.67643369804,1,1,0,1,Included,0,0,0,0,1,7.03233863656782
+All three matched,CAN,Canada,NAC,North America,High income,0,2023,2023-01-01,81.6263414634146,2023-01-01,58088.3778077995,1,1,0,1,Included,0,0,0,0,1,10.9697208850982
+All three matched,CHE,Switzerland,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,84.1560975609756,2023-01-01,85383.3564504008,1,1,0,1,Included,0,0,0,0,1,11.3549064714436
+All three matched,CHI,Channel Islands,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.1,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,CHL,Chile,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,81.167,2023-01-01,29600.4188613168,1,1,0,1,Included,0,0,0,0,1,10.2955437909321
+All three matched,CHN,China,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,77.953,2023-01-01,22687.2519534328,1,1,0,1,Included,0,0,0,0,1,10.0295584577654
+All three matched,CIV,Cote d'Ivoire,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,61.944,2023-01-01,6520.89886459765,1,1,0,1,Included,0,0,0,0,1,8.78276750808686
+All three matched,CMR,Cameroon,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,63.7,2023-01-01,4875.25120768005,1,1,0,1,Included,0,0,0,0,1,8.49192691188485
+All three matched,COD,"Congo, Dem. Rep.",SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,61.895,2023-01-01,1559.33806475859,1,1,0,1,Included,0,0,0,0,1,7.35201669273301
+All three matched,COG,"Congo, Rep.",SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,65.772,2023-01-01,6172.28776650683,1,1,0,1,Included,0,0,0,0,1,8.7278248369112
+All three matched,COL,Colombia,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,77.725,2023-01-01,18406.6242338491,1,1,0,1,Included,0,0,0,0,1,9.82046589151724
+All three matched,COM,Comoros,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,66.777,2023-01-01,3508.15862331545,1,1,0,1,Included,0,0,0,0,1,8.16284657006256
+All three matched,CPV,Cabo Verde,SSF,Sub-Saharan Africa,Upper middle income,0,2023,2023-01-01,76.059,2023-01-01,9228.4604533114,1,1,0,1,Included,0,0,0,0,1,9.1300475154601
+All three matched,CRI,Costa Rica,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,80.799,2023-01-01,26378.5409941926,1,1,0,1,Included,0,0,0,0,1,10.1803061174708
+All three matched,CUB,Cuba,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,78.085,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,CUW,Curacao,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,76.8,2023-01-01,27617.9204283638,1,1,0,1,Included,0,0,0,0,1,10.2262201318898
+All three matched,CYM,Cayman Islands,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,80.358,2023-01-01,79580.8872845653,1,1,0,1,Included,0,0,0,0,1,11.2845292335111
+All three matched,CYP,Cyprus,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.648,2023-01-01,51674.90234375,1,1,0,1,Included,0,0,0,0,1,10.852727494732
+All three matched,CZE,Czechia,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,79.8268292682927,2023-01-01,47558.4106763314,1,1,0,1,Included,0,0,0,0,1,10.7697139330119
+All three matched,DEU,Germany,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.0414634146342,2023-01-01,63140.1949099669,1,1,0,1,Included,0,0,0,0,1,11.0531128490563
+All three matched,DJI,Djibouti,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,0,2023,2023-01-01,65.987,2023-01-01,6510.67859061619,1,1,0,1,Included,0,0,0,0,1,8.78119896796008
+All three matched,DMA,Dominica,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,71.132,2023-01-01,18278.2253401989,1,1,0,1,Included,0,0,0,0,1,9.81346575824936
+All three matched,DNK,Denmark,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.7536585365854,2023-01-01,68993.9031100362,1,1,0,1,Included,0,0,0,0,1,11.1417734189512
+All three matched,DOM,Dominican Republic,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,73.72,2023-01-01,23282.4895071054,1,1,0,1,Included,0,0,0,0,1,10.0554568337183
+All three matched,DZA,Algeria,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,0,2023,2023-01-01,76.261,2023-01-01,15159.3242373415,1,1,0,1,Included,0,0,0,0,1,9.6263710828296
+All three matched,ECU,Ecuador,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,77.392,2023-01-01,14321.1648295611,1,1,0,1,Included,0,0,0,0,1,9.56949378005293
+All three matched,EGY,"Egypt, Arab Rep.",MEA,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,0,2023,2023-01-01,71.633,2023-01-01,16691.3873991962,1,1,0,1,Included,0,0,0,0,1,9.72264814077414
+All three matched,ERI,Eritrea,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,68.624,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,ESP,Spain,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,83.9341463414634,2023-01-01,47322.5937004504,1,1,0,1,Included,0,0,0,0,1,10.7647431285185
+All three matched,EST,Estonia,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,78.7926829268293,2023-01-01,41284.7746875532,1,1,0,1,Included,0,0,0,0,1,10.6282490593473
+All three matched,ETH,Ethiopia,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,67.315,2023-01-01,2757.95923626099,1,1,0,1,Included,0,0,0,0,1,7.92224627806308
+All three matched,FIN,Finland,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.5853658536585,2023-01-01,56051.7701129501,1,1,0,1,Included,0,0,0,0,1,10.9340310089641
+All three matched,FJI,Fiji,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,67.316,2023-01-01,13194.8047570404,1,1,0,1,Included,0,0,0,0,1,9.48757845208982
+All three matched,FRA,France,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,82.8317073170732,2023-01-01,54296.7230897731,1,1,0,1,Included,0,0,0,0,1,10.9022191558463
+All three matched,FRO,Faroe Islands,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,82.9521195121951,2023-01-01,71828.4342781841,1,1,0,1,Included,0,0,0,0,1,11.1820356972283
+All three matched,FSM,"Micronesia, Fed. Sts.",EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,67.198,2023-01-01,3841.27116510816,1,1,0,1,Included,0,0,0,0,1,8.25355862338282
+All three matched,GAB,Gabon,SSF,Sub-Saharan Africa,Upper middle income,0,2023,2023-01-01,68.337,2023-01-01,18701.4227766323,1,1,0,1,Included,0,0,0,0,1,9.8363548842603
+All three matched,GBR,United Kingdom,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.2380975609756,2023-01-01,53423.4226338292,1,1,0,1,Included,0,0,0,0,1,10.8860045548816
+All three matched,GEO,Georgia,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,74.496,2023-01-01,22590.5293649146,1,1,0,1,Included,0,0,0,0,1,10.0252860427826
+All three matched,GHA,Ghana,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,65.498,2023-01-01,6808.53775003964,1,1,0,1,Included,0,0,0,0,1,8.82593265509499
+All three matched,GIB,Gibraltar,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,83.553,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,GIN,Guinea,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,60.74,2023-01-01,3904.82395527998,1,1,0,1,Included,0,0,0,0,1,8.26996797938304
+All three matched,GMB,"Gambia, The",SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,65.86,2023-01-01,2963.59873467436,1,1,0,1,Included,0,0,0,0,1,7.9941595975868
+All three matched,GNB,Guinea-Bissau,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,64.085,2023-01-01,2660.81444655656,1,1,0,1,Included,0,0,0,0,1,7.88638753782732
+All three matched,GNQ,Equatorial Guinea,SSF,Sub-Saharan Africa,Upper middle income,0,2023,2023-01-01,63.707,2023-01-01,15302.1517835147,1,1,0,1,Included,0,0,0,0,1,9.63574873693713
+All three matched,GRC,Greece,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.7365853658537,2023-01-01,36700.5134631055,1,1,0,1,Included,0,0,0,0,1,10.5105460247651
+All three matched,GRD,Grenada,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,75.205,2023-01-01,17093.1562867447,1,1,0,1,Included,0,0,0,0,1,9.74643344523306
+All three matched,GRL,Greenland,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,70.9724390243902,2023-01-01,71037.5372239623,1,1,0,1,Included,0,0,0,0,1,11.1709637096096
+All three matched,GTM,Guatemala,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,72.602,2023-01-01,12380.3715121996,1,1,0,1,Included,0,0,0,0,1,9.42386755485129
+All three matched,GUM,Guam,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,77.209,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,GUY,Guyana,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,70.18,2023-01-01,49312.3603225444,1,1,0,1,Included,0,0,0,0,1,10.8059300450882
+All three matched,HKG,"Hong Kong SAR, China",EAS,East Asia & Pacific,High income,0,2023,2023-01-01,85.2473170731707,2023-01-01,64387.6654066058,1,1,0,1,Included,0,0,0,0,1,11.0726773627947
+All three matched,HND,Honduras,LCN,Latin America & Caribbean,Lower middle income,0,2023,2023-01-01,72.884,2023-01-01,6467.8800352783,1,1,0,1,Included,0,0,0,0,1,8.77460367310358
+All three matched,HRV,Croatia,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,78.4731707317073,2023-01-01,41320.257995772,1,1,0,1,Included,0,0,0,0,1,10.6291081670614
+All three matched,HTI,Haiti,LCN,Latin America & Caribbean,Lower middle income,0,2023,2023-01-01,64.936,2023-01-01,2939.1237948199,1,1,0,1,Included,0,0,0,0,1,7.98586678694044
+All three matched,HUN,Hungary,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,76.5707317073171,2023-01-01,40333.2546888118,1,1,0,1,Included,0,0,0,0,1,10.6049315860446
+All three matched,IDN,Indonesia,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,71.146,2023-01-01,13889.9495012858,1,1,0,1,Included,0,0,0,0,1,9.5389208001252
+All three matched,IMN,Isle of Man,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,80.999,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,IND,India,SAS,South Asia,Lower middle income,0,2023,2023-01-01,72.003,2023-01-01,8870.55027609345,1,1,0,1,Included,0,0,0,0,1,9.09049211127038
+All three matched,IRL,Ireland,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,82.8073170731707,2023-01-01,117659.728593716,1,1,0,1,Included,0,0,0,0,1,11.6755520817161
+All three matched,IRN,"Iran, Islamic Rep.",MEA,"Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,0,2023,2023-01-01,77.654,2023-01-01,17044.8173442641,1,1,0,1,Included,0,0,0,0,1,9.74360146842565
+All three matched,IRQ,Iraq,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,0,2023,2023-01-01,72.324,2023-01-01,13202.3228073856,1,1,0,1,Included,0,0,0,0,1,9.48814806334999
+All three matched,ISL,Iceland,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,82.4560975609756,2023-01-01,69268.1221404224,1,1,0,1,Included,0,0,0,0,1,11.1457400813727
+All three matched,ISR,Israel,MEA,"Middle East, North Africa, Afghanistan & Pakistan",High income,0,2023,2023-01-01,83.1951219512195,2023-01-01,47671.2476926086,1,1,0,1,Included,0,0,0,0,1,10.7720837213954
+All three matched,ITA,Italy,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,83.3512195121951,2023-01-01,52842.6288831758,1,1,0,1,Included,0,0,0,0,1,10.875073509162
+All three matched,JAM,Jamaica,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,71.479,2023-01-01,11398.8120394641,1,1,0,1,Included,0,0,0,0,1,9.3412644218881
+All three matched,JOR,Jordan,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,0,2023,2023-01-01,77.814,2023-01-01,10308.7821986337,1,1,0,1,Included,0,0,0,0,1,9.24075145157023
+All three matched,JPN,Japan,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,84.0412195121951,2023-01-01,47387.2172542523,1,1,0,1,Included,0,0,0,0,1,10.7661077931331
+All three matched,KAZ,Kazakhstan,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,74.402,2023-01-01,34703.2349286604,1,1,0,1,Included,0,0,0,0,1,10.4545881871995
+All three matched,KEN,Kenya,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,63.646,2023-01-01,5691.82513474417,1,1,0,1,Included,0,0,0,0,1,8.64678623750526
+All three matched,KGZ,Kyrgyz Republic,ECS,Europe & Central Asia,Lower middle income,0,2023,2023-01-01,72.2487804878049,2023-01-01,6575.77541290499,1,1,0,1,Included,0,0,0,0,1,8.79114778361402
+All three matched,KHM,Cambodia,EAS,East Asia & Pacific,Lower middle income,0,2023,2023-01-01,70.668,2023-01-01,6695.29194763723,1,1,0,1,Included,0,0,0,0,1,8.80915986399113
+All three matched,KIR,Kiribati,EAS,East Asia & Pacific,Lower middle income,0,2023,2023-01-01,66.473,2023-01-01,3175.02475728903,1,1,0,1,Included,0,0,0,0,1,8.06307070886774
+All three matched,KNA,St. Kitts and Nevis,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,72.145,2023-01-01,30616.577281386,1,1,0,1,Included,0,0,0,0,1,10.3292968824734
+All three matched,KOR,"Korea, Rep.",EAS,East Asia & Pacific,High income,0,2023,2023-01-01,83.4292682926829,2023-01-01,54029.3434990785,1,1,0,1,Included,0,0,0,0,1,10.8972825760901
+All three matched,KWT,Kuwait,MEA,"Middle East, North Africa, Afghanistan & Pakistan",High income,0,2023,2023-01-01,83.1878048780488,2023-01-01,47790.1933239144,1,1,0,1,Included,0,0,0,0,1,10.7745757368436
+All three matched,LAO,Lao PDR,EAS,East Asia & Pacific,Lower middle income,0,2023,2023-01-01,68.964,2023-01-01,8372.15591874407,1,1,0,1,Included,0,0,0,0,1,9.03266670722716
+All three matched,LBN,Lebanon,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,0,2023,2023-01-01,77.817,2023-01-01,11330.2687387422,1,1,0,1,Included,0,0,0,0,1,9.33523307295895
+All three matched,LBR,Liberia,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,62.163,2023-01-01,1616.92373356695,1,1,0,1,Included,0,0,0,0,1,7.38828069307638
+All three matched,LBY,Libya,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,0,2023,2023-01-01,69.339,2023-01-01,12476.5974944083,1,1,0,1,Included,0,0,0,0,1,9.43160996808528
+All three matched,LCA,St. Lucia,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,72.697,2023-01-01,23636.0265940253,1,1,0,1,Included,0,0,0,0,1,10.070527377614
+All three matched,LIE,Liechtenstein,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,84.5951219512195,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,LKA,Sri Lanka,SAS,South Asia,Upper middle income,0,2023,2023-01-01,77.483,2023-01-01,13065.0698305722,1,1,0,1,Included,0,0,0,0,1,9.47769752279861
+All three matched,LSO,Lesotho,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,57.375,2023-01-01,2592.4570129526,1,1,0,1,Included,0,0,0,0,1,7.86036135865573
+All three matched,LTU,Lithuania,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,77.290243902439,2023-01-01,46333.9006965206,1,1,0,1,Included,0,0,0,0,1,10.7436291686183
+All three matched,LUX,Luxembourg,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,83.309756097561,2023-01-01,130048.922273147,1,1,0,1,Included,0,0,0,0,1,11.7756659838232
+All three matched,LVA,Latvia,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,75.4268292682927,2023-01-01,37277.7217221317,1,1,0,1,Included,0,0,0,0,1,10.5261511543283
+All three matched,MAC,"Macao SAR, China",EAS,East Asia & Pacific,High income,0,2023,2023-01-01,83.1804878048781,2023-01-01,104815.20003062,1,1,0,1,Included,0,0,0,0,1,11.5599540788121
+All three matched,MAF,St. Martin (French part),LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,80.224,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,MAR,Morocco,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,0,2023,2023-01-01,75.313,2023-01-01,8915.3515625,1,1,0,1,Included,0,0,0,0,1,9.09552996446081
+All three matched,MCO,Monaco,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,86.372,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,MDA,Moldova,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,71.198,2023-01-01,15980.5668889856,1,1,0,1,Included,0,0,0,0,1,9.67912869359627
+All three matched,MDG,Madagascar,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,63.632,2023-01-01,1629.6055225489,1,1,0,1,Included,0,0,0,0,1,7.39609325380529
+All three matched,MDV,Maldives,SAS,South Asia,Upper middle income,0,2023,2023-01-01,81.041,2023-01-01,22333.0477138175,1,1,0,1,Included,0,0,0,0,1,10.0138228206896
+All three matched,MEX,Mexico,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,75.069,2023-01-01,21864.9236104145,1,1,0,1,Included,0,0,0,0,1,9.99263897014846
+All three matched,MHL,Marshall Islands,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,66.945,2023-01-01,6774.78265578378,1,1,0,1,Included,0,0,0,0,1,8.8209625649062
+All three matched,MKD,North Macedonia,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,75.3160975609756,2023-01-01,23455.2221318176,1,1,0,1,Included,0,0,0,0,1,10.0628484412705
+All three matched,MLI,Mali,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,60.439,2023-01-01,2861.48058063314,1,1,0,1,Included,0,0,0,0,1,7.95909445539703
+All three matched,MLT,Malta,MEA,"Middle East, North Africa, Afghanistan & Pakistan",High income,0,2023,2023-01-01,83.3560975609756,2023-01-01,60459.7655182644,1,1,0,1,Included,0,0,0,0,1,11.0097333900306
+All three matched,MMR,Myanmar,EAS,East Asia & Pacific,Lower middle income,0,2023,2023-01-01,66.889,2023-01-01,5364.13797034429,1,1,0,1,Included,0,0,0,0,1,8.58749096561147
+All three matched,MNE,Montenegro,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,77.5878048780488,2023-01-01,27243.404228981,1,1,0,1,Included,0,0,0,0,1,10.2125667241504
+All three matched,MNG,Mongolia,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,72.1224390243902,2023-01-01,16222.8638898529,1,1,0,1,Included,0,0,0,0,1,9.69417687742592
+All three matched,MNP,Northern Mariana Islands,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,78.808,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,MOZ,Mozambique,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,63.611,2023-01-01,1512.66729609671,1,1,0,1,Included,0,0,0,0,1,7.32162979277783
+All three matched,MRT,Mauritania,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,68.484,2023-01-01,6276.47521075653,1,1,0,1,Included,0,0,0,0,1,8.74456382971752
+All three matched,MUS,Mauritius,SSF,Sub-Saharan Africa,Upper middle income,0,2023,2023-01-01,73.4121951219512,2023-01-01,26471.0351422892,1,1,0,1,Included,0,0,0,0,1,10.1838064007009
+All three matched,MWI,Malawi,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,67.353,2023-01-01,1649.29873234551,1,1,0,1,Included,0,0,0,0,1,7.40810546585229
+All three matched,MYS,Malaysia,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,76.657,2023-01-01,32857.6676600774,1,1,0,1,Included,0,0,0,0,1,10.3999404109856
+All three matched,NAM,Namibia,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,67.385,2023-01-01,10126.2359555611,1,1,0,1,Included,0,0,0,0,1,9.22288495420989
+All three matched,NCL,New Caledonia,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,78.766,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,NER,Niger,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,61.183,2023-01-01,1712.97031726521,1,1,0,1,Included,0,0,0,0,1,7.44598417024942
+All three matched,NGA,Nigeria,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,54.462,2023-01-01,7843.00399007675,1,1,0,1,Included,0,0,0,0,1,8.96737720195622
+All three matched,NIC,Nicaragua,LCN,Latin America & Caribbean,Lower middle income,0,2023,2023-01-01,74.947,2023-01-01,7496.53056557505,1,1,0,1,Included,0,0,0,0,1,8.92219560123939
+All three matched,NLD,Netherlands,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.8634146341464,2023-01-01,70198.9546022361,1,1,0,1,Included,0,0,0,0,1,11.1590886981969
+All three matched,NOR,Norway,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,83.0121951219512,2023-01-01,94364.9641754336,1,1,0,1,Included,0,0,0,0,1,11.4549251410338
+All three matched,NPL,Nepal,SAS,South Asia,Lower middle income,0,2023,2023-01-01,70.354,2023-01-01,4861.230303797,1,1,0,1,Included,0,0,0,0,1,8.48904683378718
+All three matched,NRU,Naoero,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,62.109,2023-01-01,11858.5184696436,1,1,0,1,Included,0,0,0,0,1,9.38080174650625
+All three matched,NZL,New Zealand,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,81.7585365853659,2023-01-01,49592.5875512098,1,1,0,1,Included,0,0,0,0,1,10.811596657013
+All three matched,OMN,Oman,MEA,"Middle East, North Africa, Afghanistan & Pakistan",High income,0,2023,2023-01-01,80.031,2023-01-01,37793.6163957515,1,1,0,1,Included,0,0,0,0,1,10.5398954889268
+All three matched,PAK,Pakistan,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,0,2023,2023-01-01,67.649,2023-01-01,5418.7693189297,1,1,0,1,Included,0,0,0,0,1,8.5976240057229
+All three matched,PAN,Panama,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,79.594,2023-01-01,35872.9719200069,1,1,0,1,Included,0,0,0,0,1,10.4877394196174
+All three matched,PER,Peru,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,77.74,2023-01-01,15342.2741359642,1,1,0,1,Included,0,0,0,0,1,9.63836731269256
+All three matched,PHL,Philippines,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,69.833,2023-01-01,9898.53294588106,1,1,0,1,Included,0,0,0,0,1,9.20014183785712
+All three matched,PLW,Palau,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,69.269,2023-01-01,16487.15375427,1,1,0,1,Included,0,0,0,0,1,9.71033679630589
+All three matched,PNG,Papua New Guinea,EAS,East Asia & Pacific,Lower middle income,0,2023,2023-01-01,66.134,2023-01-01,4206.37834691367,1,1,0,1,Included,0,0,0,0,1,8.34435730630966
+All three matched,POL,Poland,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,78.2585365853659,2023-01-01,43672.7668014946,1,1,0,1,Included,0,0,0,0,1,10.6844800015025
+All three matched,PRI,Puerto Rico (US),LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,81.69,2023-01-01,42837.872737145,1,1,0,1,Included,0,0,0,0,1,10.6651778673331
+All three matched,PRK,"Korea, Dem. People's Rep.",EAS,East Asia & Pacific,Low income,0,2023,2023-01-01,73.642,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,PRT,Portugal,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,82.3292682926829,2023-01-01,41768.2583096874,1,1,0,1,Included,0,0,0,0,1,10.6398919594633
+All three matched,PRY,Paraguay,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,73.844,2023-01-01,15831.5849831308,1,1,0,1,Included,0,0,0,0,1,9.66976227313959
+All three matched,PSE,West Bank and Gaza,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,0,2023,2023-01-01,65.17,2023-01-01,5562.42442563953,1,1,0,1,Included,0,0,0,0,1,8.62378933998031
+All three matched,PYF,French Polynesia,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,84.07,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,QAT,Qatar,MEA,"Middle East, North Africa, Afghanistan & Pakistan",High income,0,2023,2023-01-01,82.368,2023-01-01,116159.142564088,1,1,0,1,Included,0,0,0,0,1,11.6627164485238
+All three matched,ROU,Romania,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,76.4048780487805,2023-01-01,40116.6891416904,1,1,0,1,Included,0,0,0,0,1,10.5995477147845
+All three matched,RUS,Russian Federation,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,73.2546341463415,2023-01-01,39881.44921875,1,1,0,1,Included,0,0,0,0,1,10.5936665629027
+All three matched,RWA,Rwanda,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,67.785,2023-01-01,3168.03075281515,1,1,0,1,Included,0,0,0,0,1,8.06086546021521
+All three matched,SAU,Saudi Arabia,MEA,"Middle East, North Africa, Afghanistan & Pakistan",High income,0,2023,2023-01-01,78.732,2023-01-01,64481.8441927288,1,1,0,1,Included,0,0,0,0,1,11.0741389777753
+All three matched,SDN,Sudan,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,66.331,2023-01-01,2181.0791015625,1,1,0,1,Included,0,0,0,0,1,7.68757503402743
+All three matched,SEN,Senegal,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,68.683,2023-01-01,4304.76148721773,1,1,0,1,Included,0,0,0,0,1,8.36747701166096
+All three matched,SGP,Singapore,EAS,East Asia & Pacific,High income,0,2023,2023-01-01,83.0975609756098,2023-01-01,130296.843789261,1,1,0,1,Included,0,0,0,0,1,11.7775705401738
+All three matched,SLB,Solomon Islands,EAS,East Asia & Pacific,Lower middle income,0,2023,2023-01-01,70.528,2023-01-01,2339.87469992347,1,1,0,1,Included,0,0,0,0,1,7.7578526598768
+All three matched,SLE,Sierra Leone,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,61.786,2023-01-01,3034.94608192505,1,1,0,1,Included,0,0,0,0,1,8.01794893790747
+All three matched,SLV,El Salvador,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,72.099,2023-01-01,11404.3342262685,1,1,0,1,Included,0,0,0,0,1,9.34174875741338
+All three matched,SMR,San Marino,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,85.706,2023-01-01,70951.7919690715,1,1,0,1,Included,0,0,0,0,1,11.1697559390567
+All three matched,SOM,"Somalia, Fed. Rep.",SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,58.816,2023-01-01,1401.64735228455,1,1,0,1,Included,0,0,0,0,1,7.24540350406104
+All three matched,SRB,Serbia,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,76.1414634146341,2023-01-01,25735.1334774195,1,1,0,1,Included,0,0,0,0,1,10.1556123986838
+All three matched,SSD,South Sudan,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,57.617,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,STP,Sao Tome and Principe,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,69.718,2023-01-01,5541.3016760535,1,1,0,1,Included,0,0,0,0,1,8.61998471171909
+All three matched,SUR,Suriname,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,73.631,2023-01-01,19020.8663751009,1,1,0,1,Included,0,0,0,0,1,9.85329188580335
+All three matched,SVK,Slovak Republic,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,78.119512195122,2023-01-01,39501.9474231962,1,1,0,1,Included,0,0,0,0,1,10.5841052515269
+All three matched,SVN,Slovenia,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,81.9292682926829,2023-01-01,47986.4195855821,1,1,0,1,Included,0,0,0,0,1,10.7786733245587
+All three matched,SWE,Sweden,ECS,Europe & Central Asia,High income,0,2023,2023-01-01,83.309756097561,2023-01-01,62122.5116950792,1,1,0,1,Included,0,0,0,0,1,11.0368637093988
+All three matched,SWZ,Eswatini,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,64.123,2023-01-01,10181.5040730397,1,1,0,1,Included,0,0,0,0,1,9.22832802703367
+All three matched,SXM,Sint Maarten (Dutch part),LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,76.371,2023-01-01,46571.08813424,1,1,0,1,Included,0,0,0,0,1,10.7487352012658
+All three matched,SYC,Seychelles,SSF,Sub-Saharan Africa,High income,0,2023,2023-01-01,75.419512195122,2023-01-01,28713.6672353088,1,1,0,1,Included,0,0,0,0,1,10.265128498685
+All three matched,SYR,Syrian Arab Republic,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Low income,0,2023,2023-01-01,72.12,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,TCA,Turks and Caicos Islands,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,78.008,2023-01-01,31839.3705381969,1,1,0,1,Included,0,0,0,0,1,10.3684588702339
+All three matched,TCD,Chad,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,55.069,2023-01-01,2433.53330962707,1,1,0,1,Included,0,0,0,0,1,7.79709951713013
+All three matched,TGO,Togo,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,62.74,2023-01-01,3215.82300022488,1,1,0,1,Included,0,0,0,0,1,8.07583859154074
+All three matched,THA,Thailand,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,76.412,2023-01-01,21245.2706771879,1,1,0,1,Included,0,0,0,0,1,9.96388959321559
+All three matched,TJK,Tajikistan,ECS,Europe & Central Asia,Lower middle income,0,2023,2023-01-01,71.79,2023-01-01,4472.3241378777,1,1,0,1,Included,0,0,0,0,1,8.4056634938446
+All three matched,TKM,Turkmenistan,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,70.073,2023-01-01,17685.8585929282,1,1,0,1,Included,0,0,0,0,1,9.78052064967955
+All three matched,TLS,Timor-Leste,EAS,East Asia & Pacific,Lower middle income,0,2023,2023-01-01,67.689,2023-01-01,4331.07792560386,1,1,0,1,Included,0,0,0,0,1,8.3735717335727
+All three matched,TON,Tonga,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,72.895,2023-01-01,7031.32021704688,1,1,0,1,Included,0,0,0,0,1,8.85812976476141
+All three matched,TTO,Trinidad and Tobago,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,73.49,2023-01-01,31196.603554718,1,1,0,1,Included,0,0,0,0,1,10.3480645074461
+All three matched,TUN,Tunisia,MEA,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,0,2023,2023-01-01,76.508,2023-01-01,12650.9615158166,1,1,0,1,Included,0,0,0,0,1,9.44548850042258
+All three matched,TUR,Turkiye,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,77.156,2023-01-01,35069.1701714685,1,1,0,1,Included,0,0,0,0,1,10.4650776807917
+All three matched,TUV,Tuvalu,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,67.105,2023-01-01,5315.16301028104,1,1,0,1,Included,0,0,0,0,1,8.57831896016106
+All three matched,TZA,Tanzania,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,66.995,2023-01-01,3620.79345703125,1,1,0,1,Included,0,0,0,0,1,8.19444846782705
+All three matched,UGA,Uganda,SSF,Sub-Saharan Africa,Low income,0,2023,2023-01-01,68.252,2023-01-01,2791.05576885861,1,1,0,1,Included,0,0,0,0,1,7.93417521501301
+All three matched,UKR,Ukraine,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,73.422,2023-01-01,15916.9580078125,1,1,0,1,Included,0,0,0,0,1,9.675140361229
+All three matched,URY,Uruguay,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,78.138,2023-01-01,31100.9696889882,1,1,0,1,Included,0,0,0,0,1,10.3449942773914
+All three matched,USA,United States,NAC,North America,High income,0,2023,2023-01-01,78.3853658536585,2023-01-01,74351.6718197429,1,1,0,1,Included,0,0,0,0,1,11.2165614374423
+All three matched,UZB,Uzbekistan,ECS,Europe & Central Asia,Lower middle income,0,2023,2023-01-01,72.388,2023-01-01,10514.0955721447,1,1,0,1,Included,0,0,0,0,1,9.26047207132711
+All three matched,VCT,St. Vincent and the Grenadines,LCN,Latin America & Caribbean,Upper middle income,0,2023,2023-01-01,71.23,2023-01-01,17858.2446468702,1,1,0,1,Included,0,0,0,0,1,9.79022056555047
+All three matched,VEN,"Venezuela, RB",LCN,Latin America & Caribbean,Lower middle income,0,2023,2023-01-01,72.514,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,VGB,British Virgin Islands,LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,77.276,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,VIR,Virgin Islands (U.S.),LCN,Latin America & Caribbean,High income,0,2023,2023-01-01,80.519512195122,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,VNM,Viet Nam,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,74.588,2023-01-01,13534.7997843016,1,1,0,1,Included,0,0,0,0,1,9.51301940949729
+All three matched,VUT,Vanuatu,EAS,East Asia & Pacific,Lower middle income,0,2023,2023-01-01,71.477,2023-01-01,3782.82649029418,1,1,0,1,Included,0,0,0,0,1,8.23822675794389
+All three matched,WSM,Samoa,EAS,East Asia & Pacific,Upper middle income,0,2023,2023-01-01,71.698,2023-01-01,7384.69163688613,1,1,0,1,Included,0,0,0,0,1,8.90716443876345
+All three matched,XKX,Kosovo,ECS,Europe & Central Asia,Upper middle income,0,2023,2023-01-01,78.033,2023-01-01,14240.2030320365,1,1,0,1,Included,0,0,0,0,1,9.56382444273205
+All three matched,YEM,"Yemen, Rep.",MEA,"Middle East, North Africa, Afghanistan & Pakistan",Low income,0,2023,2023-01-01,69.295,2023-01-01,,1,1,0,1,Missing GDP,0,1,0,0,0,
+All three matched,ZAF,South Africa,SSF,Sub-Saharan Africa,Upper middle income,0,2023,2023-01-01,66.139,2023-01-01,13695.3755694076,1,1,0,1,Included,0,0,0,0,1,9.52481350515522
+All three matched,ZMB,Zambia,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,66.349,2023-01-01,3673.4841969922,1,1,0,1,Included,0,0,0,0,1,8.20889586315702
+All three matched,ZWE,Zimbabwe,SSF,Sub-Saharan Africa,Lower middle income,0,2023,2023-01-01,62.775,2023-01-01,5218.04526596398,1,1,0,1,Included,0,0,0,0,1,8.55987814062339
