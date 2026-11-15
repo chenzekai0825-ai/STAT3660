@@ -40,7 +40,7 @@
 | `docs/VALIDATION.md` | 实际本地验证结果与 SAS 尚待验证项 |
 | `docs/REPORT_DRAFT.md` | 15 页报告骨架（按评分表的六节结构） |
 | `docs/PPT_OUTLINE.md` | 10 分钟汇报的 12 页大纲与分工 |
-| `tools/` | 重建输入（openpyxl）、独立验证、下载后 SAS 输出验收 |
+| `tools/` | 重建输入（openpyxl）、独立验证、下载后 SAS 输出验收、从 HTML 提取图 |
 
 数据来源及定义：[预期寿命](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)、[人均 GDP PPP（2021 年不变国际元）](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)、[经济体 API](https://api.worldbank.org/v2/country?format=json&per_page=400)。保存的 WDI 返回头显示更新于 **2026-10-08**，下载于 **2026-11-08**；选用固定 2023 年截面，下载日期和文件哈希见 `data/raw/manifest.json`。
 
@@ -83,6 +83,7 @@
 python3 tools/prepare_inputs.py     # 从冻结 JSON 重建全部输入（含 openpyxl 生成 Excel）
 python3 tools/validate_inputs.py    # 45 项独立核对 + Python 参考输出
 python3 tools/check_sas_run.py results/sas   # SAS 跑完后验收
+python3 tools/extract_pngs.py results/sas    # 从 analysis.html 提取图（PNG 没落到磁盘时用）
 ```
 
 需要 pandas、numpy、scipy、statsmodels、matplotlib、openpyxl（版本见 `tools/python-reference-versions.txt`）。只有明确需要更新数据时才用 `prepare_inputs.py --download`；刷新后必须重新核对样本与期望行数。
