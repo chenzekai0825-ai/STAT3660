@@ -1,6 +1,19 @@
 #!/usr/bin/env python3
-"""Rebuild CSV/DAT from the frozen official JSON. --download explicitly refreshes it.
-XLSX is independently built by build_metadata.mjs; normal SAS runs need neither tool.
+"""Rebuild every SAS input file from the frozen official JSON.
+
+    python3 tools/prepare_inputs.py              # offline, verifies SHA-256 first
+    python3 tools/prepare_inputs.py --download   # refreshes the raw JSON snapshot
+
+Outputs (all inside data/input/):
+    economies.xlsx        metadata catalogue, built with openpyxl
+    life_expectancy.csv   life expectancy, delimited text
+    gdp_ppp.dat           GDP per capita, 44-byte fixed width ASCII
+    indicator_notes.csv   the real indicator definitions (long free text)
+    indicator_vintage.csv the real API vintage dates (lastupdated / retrieval)
+
+The Excel workbook is built here with openpyxl, so the whole pipeline can be
+reproduced with public tools only.  Nothing in this repository depends on a
+private or vendor-specific service.
 """
 import argparse
 import csv
@@ -10,6 +23,10 @@ from datetime import datetime
 from pathlib import Path
 from urllib.request import urlopen
 from zoneinfo import ZoneInfo
+
+from openpyxl import Workbook
+from openpyxl.styles import Alignment, Font
+from openpyxl.utils import get_column_letter
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW, INPUT = ROOT / 'data/raw', ROOT / 'data/input'
@@ -34,6 +51,31 @@ def write_csv(name, columns, rows):
         w = csv.writer(f, lineterminator='\n')
         w.writerow(columns)
         w.writerows(rows)
+
+
+def build_excel(countries):
+    """Countries JSON -> one workbook, one sheet, six columns, nothing derived."""
+    columns = ['iso3', 'country_name', 'region_id', 'region', 'income_group', 'is_aggregate']
+    wb = Workbook()
+    ws = wb.active
+    ws.title = 'Economies'
+    ws.append(columns)
+    for cell in ws[1]:
+        cell.font = Font(bold=True)
+        cell.alignment = Alignment(horizontal='center')
+    for r in sorted(countries, key=lambda x: x['id']):
+        ws.append([
+            r['id'],
+            r['name'],
+            r['region']['id'],
+            r['region']['value'],
+            r['incomeLevel']['value'],
+            1 if r['region']['id'] == 'NA' else 0,
+        ])
+    for i, width in enumerate([6, 56, 10, 34, 22, 12], start=1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    ws.freeze_panes = 'A2'
+    wb.save(INPUT / 'economies.xlsx')
 
 
 def main():
@@ -79,15 +121,38 @@ def main():
             line = f'{k} {y:04d} {y}-01-01 {token:>24s}'
             assert len(line) == 44
             f.write(line + '\n')
+
+    # Real indicator definitions. Only the two columns that the source actually
+    # provides are kept; the SAS program derives its own length audit from the text.
     notes = []
     for name in ['life_metadata.json', 'gdp_metadata.json']:
         m = read(name)[0]
-        # Normalize literal backslash-n and actual whitespace for one CSV line.
         desc = ' '.join(m['sourceNote'].replace('\\n', ' ').split())
         assert 0 < len(desc.encode('utf-8')) < 4096
-        notes.append([m['id'], desc, len(desc.encode('utf-8')), desc[-40:]])
-    write_csv('indicator_notes.csv', ['indicator_id', 'description', 'expected_bytes', 'expected_suffix'], notes)
+        notes.append([m['id'], desc])
+    write_csv('indicator_notes.csv', ['indicator_id', 'description'], notes)
+
+    # Real vintage dates from the API response header and the download manifest.
+    manifest_path = RAW / 'manifest.json'
+    # Files are saved immediately after each HTTP response. The latest raw-file
+    # timestamp records completion of the five downloads, not conversion time.
+    stamp = datetime.fromtimestamp(max((RAW / n).stat().st_mtime for n in URLS),
+                                   ZoneInfo('Asia/Hong_Kong')).isoformat(timespec='seconds')
+    if manifest_path.exists() and not args.download:
+        stamp = json.loads(manifest_path.read_text())['downloaded_at_hong_kong']
+    retrieved_date = stamp[:10]
+    vintage = []
+    # lastupdated comes from the DATA endpoint header; the indicator name from
+    # the indicator metadata endpoint.  Both are real values returned by the API.
+    for meta_name, data_name in [('life_metadata.json', 'life_2023.json'),
+                                 ('gdp_metadata.json', 'gdp_2023.json')]:
+        meta = json.loads((RAW / meta_name).read_text())[1][0]
+        header = json.loads((RAW / data_name).read_text())[0]
+        vintage.append([meta['id'], meta['name'], header['lastupdated'], retrieved_date])
+    write_csv('indicator_vintage.csv',
+              ['indicator_id', 'indicator_name', 'last_updated', 'retrieved_date'], vintage)
     write_csv('key_mapping_audit.csv', ['source_file', 'api_iso2', 'resolved_wb_code', 'source_name'], mapping_audit)
+
     # The manifest freezes exact download bytes and reference counts, not estimates.
     lm, gm = {k: v for k, _, v in life}, {k: v for k, _, v in gdp}
     eligible = [r for r in countries if r['region']['id'] != 'NA']
@@ -97,15 +162,9 @@ def main():
         'life_missing': sum(lm.get(r['id']) is None for r in eligible),
         'gdp_missing': sum(gm.get(r['id']) is None for r in eligible),
         'complete_cases': sum(lm.get(r['id']) is not None and gm.get(r['id']) is not None and gm[r['id']] > 0 for r in eligible),
-        'max_note_bytes': max(r[2] for r in notes),
+        'max_note_bytes': max(len(r[1].encode('utf-8')) for r in notes),
+        'vintage_rows': len(vintage),
     }
-    manifest_path = RAW / 'manifest.json'
-    # Files are saved immediately after each HTTP response. The latest raw-file
-    # timestamp records completion of the five downloads, not conversion time.
-    stamp = datetime.fromtimestamp(max((RAW / n).stat().st_mtime for n in URLS),
-                                   ZoneInfo('Asia/Hong_Kong')).isoformat(timespec='seconds')
-    if manifest_path.exists() and not args.download:
-        stamp = json.loads(manifest_path.read_text())['downloaded_at_hong_kong']
     manifest = {'downloaded_at_hong_kong': stamp, 'study_year': 2023, 'sources': [], 'expected': expected}
     for name, url in URLS.items():
         data = (RAW / name).read_bytes()
@@ -114,6 +173,9 @@ def main():
                                     'api_header': json.loads(data)[0]})
     manifest_path.write_text(json.dumps(manifest, indent=2) + '\n')
     (RAW / 'source_urls.json').write_text(json.dumps(URLS, indent=2) + '\n')
+
+    build_excel(countries)
+
     (ROOT / 'sas/snapshot_expectations.sas').write_text(
         '/* Generated from frozen raw JSON by tools/prepare_inputs.py. */\n' +
         ''.join(f'%let expected_{k}={v};\n' for k, v in expected.items()))

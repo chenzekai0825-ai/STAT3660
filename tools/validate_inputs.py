@@ -111,7 +111,9 @@ def main():
             if not ((original is None and pd.isna(actual)) or (original is not None and actual == original)):
                 check(f'{raw_name}: exact values', False, repr((row.iso3, actual, original)))
         check(f'{raw_name}: exact values', True, f'{len(df)} values preserved; null stays missing, no zero replacement')
-    # Source-note audit and a controlled 200-byte truncation demonstration.
+    # Source-note audit: compare the full text with the normalized raw source and
+    # measure what a 200-byte buffer would have lost. The input file carries no
+    # reference columns; the expectation is derived here from the frozen JSON.
     notes = pd.read_csv(INPUT / 'indicator_notes.csv', keep_default_na=False)
     note_sources = {m['id']: m for name in ['life_metadata.json', 'gdp_metadata.json'] for m in raw_rows(name)}
     note_audit = []
@@ -120,12 +122,21 @@ def main():
         expected_note = ' '.join(raw_note.replace('\\n', ' ').split())
         check(f'{row.indicator_id}: full long field', row.description == expected_note, 'Full content compared to normalized raw source')
         encoded = row.description.encode('utf-8')
-        check(f'{row.indicator_id}: length and suffix', len(encoded) == row.expected_bytes and row.description[-40:] == row.expected_suffix,
-              f'{len(encoded)} UTF-8 bytes; suffix equals source')
-        note_audit.append({'indicator_id': row.indicator_id, 'expected_bytes': row.expected_bytes,
-                           'actual_bytes': len(encoded), 'narrow_200_bytes': min(200, len(encoded)),
+        note_audit.append({'indicator_id': row.indicator_id, 'actual_bytes': len(encoded),
+                           'narrow_200_bytes': min(200, len(encoded)),
+                           'bytes_lost_at_200': max(0, len(encoded) - 200),
                            'would_truncate_at_200': int(len(encoded) > 200), 'full_field_verified': 1})
     write('long_field_audit_reference', pd.DataFrame(note_audit))
+
+    # Vintage dates: lastupdated must match the frozen API response header.
+    vintage = pd.read_csv(INPUT / 'indicator_vintage.csv')
+    check('vintage rows', len(vintage) == 2, f'{len(vintage)} indicators')
+    for row in vintage.itertuples(index=False):
+        stem = 'life_2023.json' if row.indicator_id.startswith('SP.') else 'gdp_2023.json'
+        header = json.loads((RAW / stem).read_text(encoding='utf-8'))[0]
+        check(f'{row.indicator_id}: lastupdated matches API header', row.last_updated == header['lastupdated'],
+              f'{row.last_updated} vs {header["lastupdated"]}')
+    write('indicator_vintage_reference', vintage)
     # Merge all sources before excluding aggregates, preserving unmatched evidence.
     merged = life.merge(gdp, how='outer', on=['iso3', 'year'], validate='one_to_one', indicator='indicator_merge')
     check('indicator merge', merged.indicator_merge.eq('both').all() and len(merged) == len(life) == len(gdp), f'{len(merged)} both; no unmatched indicator keys')
@@ -151,7 +162,9 @@ def main():
     check('plausibility: GDP', analysis.gdp_ppp.dropna().gt(0).all(), 'All observed GDP values >0')
     measured = {'metadata_rows': len(meta), 'life_rows': len(life), 'gdp_rows': len(gdp), 'economies': len(analysis),
                 'life_missing': int(analysis.life_exp.isna().sum()), 'gdp_missing': int(analysis.gdp_ppp.isna().sum()),
-                'complete_cases': int(analysis.complete_case.sum()), 'max_note_bytes': int(notes.expected_bytes.max())}
+                'complete_cases': int(analysis.complete_case.sum()),
+                'max_note_bytes': max(n['actual_bytes'] for n in note_audit),
+                'vintage_rows': len(vintage)}
     check('all counts equal frozen manifest', measured == manifest['expected'], repr(measured))
     final_columns = ['iso3', 'country_name', 'region_id', 'region', 'income_group', 'year', 'period_start', 'life_exp', 'gdp_ppp', 'log_gdp', 'complete_case', 'exclusion_reason']
     analysis = analysis.sort_values('iso3')
@@ -259,6 +272,7 @@ def main():
               'regression': {'n': len(sample), 'intercept': model.params['const'], 'slope': model.params['log_gdp'],
                              'r_squared': model.rsquared, 'rmse': float(np.sqrt(model.mse_resid)), 'hc3_slope_se': float(robust.bse[1])}}
     (VALIDATION / 'validation_summary.json').write_text(json.dumps(result, indent=2) + '\n')
+    notes_vintage = ', '.join(f"{r.indicator_id} = {r.last_updated}" for r in vintage.itertuples(index=False))
     summary_text = f'''# 实际验证记录
 
 本文件由 `tools/validate_inputs.py` 实际运行生成。**验证引擎为 Python，未运行 SAS**。输入数据转换和独立参考统计已通过，不能据此认定 SAS 语法、ODS、XLSX 引擎或 SAS 日志已通过。
@@ -271,7 +285,8 @@ def main():
 - 寿命 CSV：266 行；GDP DAT：266 行，每行恰好 44 个 ASCII 字节。
 - 两个指标表 `(iso3, year)` 唯一，逐个值与原始 JSON 对照通过，无截断或人为填补。
 - 两份输入的全部日期均解析为 2023-01-01。这是年度起始标记，并非采集日期。
-- 长字段最大 1,342 字节；完整内容、预期长度、尾部文字均一致。200 字节字段会截断 GDP 指标说明。
+- 长字段最大 1,342 字节，与原始 `sourceNote` 逐字符一致；输入文件本身不含任何"预期长度"列，200 字节缓冲会截断 GDP 指标说明（SAS 侧现场验证）。
+- 指标 vintage 日期：`last_updated` = {notes_vintage}，取自 API 响应头 `lastupdated`，与冻结 JSON 一致。
 - 指标合并为 266 行，未匹配 0 行。与元数据完整合并后 296 行，其中 30 行只存在元数据，全部为汇总项目。共排除 79 个汇总项目。
 - 排除汇总项目后 217 个经济体：寿命缺失 0 个、GDP 缺失 20 个；回归完整案例 197 个。GDP 缺失保持缺失，未替为 0。
 - 最终参考 CSV 已重新读回并确认 217 行；含是否进入回归及排除原因。使用 17 位有效数字导出，全部数值字段读回后与内存值完全一致，缺失值保持缺失。

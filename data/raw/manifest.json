@@ -75,6 +75,7 @@
     "life_missing": 0,
     "gdp_missing": 20,
     "complete_cases": 197,
-    "max_note_bytes": 1342
+    "max_note_bytes": 1342,
+    "vintage_rows": 2
   }
 }

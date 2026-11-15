@@ -17,27 +17,35 @@ OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / 'results/sas'
 def main():
     failures = []
     warnings = []
+    optional_notes = []
     required = ['RUN_STATUS.txt', 'run_all.log', 'analysis.html', 'assertions.csv',
                 'final_analysis.csv', 'row_counts.csv', 'input_types.csv',
-                'date_audit.csv', 'long_field_audit.csv', 'merge_audit.csv',
-                'unmatched_rows.csv', 'analysis_sample_flow.csv',
+                'date_audit.csv', 'long_field_audit.csv', 'indicator_vintage_audit.csv',
+                'merge_audit.csv', 'unmatched_rows.csv', 'analysis_sample_flow.csv',
                 'descriptive_statistics.csv', 'life_expectancy_extremes.csv',
-                'extreme_cutoff_audit.csv', 'regression_sample_size.csv',
-                'regression_fit.csv', 'regression_parameters.csv',
-                'regression_specification_test.csv', 'regression_slope_test_hc3.csv',
-                'regression_diagnostics.csv']
+                'extreme_cutoff_audit.csv', 'region_summary.csv',
+                'regression_sample_size.csv', 'regression_fit.csv',
+                'regression_parameters.csv', 'regression_diagnostics.csv']
+    # Tables from the HCC/SPEC options: their ODS names differ between releases,
+    # so a missing file is reported as a note, not as a failed run.
+    optional = ['regression_specification_test.csv', 'regression_slope_test_ordinary.csv',
+                'regression_slope_test_hc3.csv']
     for name in required:
         if not (OUT / name).is_file() or (OUT / name).stat().st_size == 0:
             failures.append(f'Missing/empty SAS output: {name}')
+    for name in optional:
+        if not (OUT / name).is_file() or (OUT / name).stat().st_size == 0:
+            optional_notes.append(f'{name} was not produced by this SAS release')
     for prefix in ['01_income_life_scatter','02_life_expectancy_by_region',
                    '03_residuals_vs_fitted','04_residual_normal_qq',
-                   '05_cooks_distance','06_leverage_studentized_residual']:
+                   '05_cooks_distance','06_leverage_studentized_residual',
+                   '07_life_by_region_mean_clm']:
         if not list(OUT.glob(prefix + '*.png')):
             failures.append(f'Missing PNG: {prefix}')
     log = (OUT / 'run_all.log').read_text(errors='replace') if (OUT/'run_all.log').exists() else ''
     # Match real log messages, not MPRINT echoes of the error-handling source.
     danger = re.compile(r'^\s*(?:ERROR(?:\s+\d+-\d+)?:|WARNING:|NOTE:.*(?:uninitialized|Invalid data|converted to|repeats of BY values|Missing values were generated|Division by zero))',re.I)
-    warnings = [line for line in log.splitlines() if danger.search(line)]
+    warnings += [line for line in log.splitlines() if danger.search(line)]
     if 'NOTE: PROJECT_COMPLETED.' not in log:
         failures.append('No PROJECT_COMPLETED marker in actual SAS log')
     if (OUT/'RUN_STATUS.txt').exists() and not (OUT/'RUN_STATUS.txt').read_text().startswith('COMPLETED:'):
@@ -77,7 +85,8 @@ def main():
     except (ValueError,KeyError,OSError) as exc:
         failures.append(f'Cannot validate output structure: {exc}')
     result={'sas_outputs_directory':str(OUT),'passed':not failures and not warnings,
-            'failures':failures,'log_messages_requiring_review':warnings}
+            'failures':failures,'log_messages_requiring_review':warnings,
+            'optional_outputs_missing':optional_notes}
     print(json.dumps(result,ensure_ascii=False,indent=2))
     return 0 if result['passed'] else 1
 

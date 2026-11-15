@@ -9,6 +9,18 @@ run;
   run;
 %mend;
 
+/* Export a data set only when it exists. Used for tables captured from ODS:
+   if an ODS table name differs between SAS releases, the run continues and
+   the log carries a WARNING instead of a fatal error. */
+%macro export_if_exists(ds,name);
+  %if %sysfunc(exist(&ds)) %then %do;
+    %export_csv(&ds,&name);
+  %end;
+  %else %do;
+    %put WARNING: &ds was not produced by this SAS release; &name..csv skipped.;
+  %end;
+%mend;
+
 %macro fail(message);
   %put ERROR: PROJECT_FAILED: &message;
   %export_csv(proj.assertions,assertions);

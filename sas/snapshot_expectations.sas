@@ -7,3 +7,4 @@
 %let expected_gdp_missing=20;
 %let expected_complete_cases=197;
 %let expected_max_note_bytes=1342;
+%let expected_vintage_rows=2;

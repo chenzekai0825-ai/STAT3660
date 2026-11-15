@@ -225,9 +225,11 @@ footnote;
 %export_csv(work.reg_anova,regression_anova);
 %export_csv(work.reg_fit,regression_fit);
 %export_csv(work.reg_parameters,regression_parameters);
-%export_csv(work.reg_spec_test,regression_specification_test);
-%export_csv(work.reg_slope_test_ordinary,regression_slope_test_ordinary);
-%export_csv(work.reg_slope_test_hc3,regression_slope_test_hc3);
+/* The three tables below belong to the HCC/SPEC options. Their ODS names have
+   changed between SAS releases, so a missing table only warns and keeps going. */
+%export_if_exists(work.reg_spec_test,regression_specification_test);
+%export_if_exists(work.reg_slope_test_ordinary,regression_slope_test_ordinary);
+%export_if_exists(work.reg_slope_test_hc3,regression_slope_test_hc3);
 
 /* F. Diagnostics identify records for investigation; they are not exclusion
    rules. p=2 counts the intercept and the one income slope. */

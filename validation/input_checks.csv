@@ -30,16 +30,17 @@ gdp_2023.json: exact values,PASS,"266 values preserved; null stays missing, no z
 life_metadata.json: complete API page,PASS,"rows=1, total=1, pages=1"
 gdp_metadata.json: complete API page,PASS,"rows=1, total=1, pages=1"
 SP.DYN.LE00.IN: full long field,PASS,Full content compared to normalized raw source
-SP.DYN.LE00.IN: length and suffix,PASS,186 UTF-8 bytes; suffix equals source
 NY.GDP.PCAP.PP.KD: full long field,PASS,Full content compared to normalized raw source
-NY.GDP.PCAP.PP.KD: length and suffix,PASS,1342 UTF-8 bytes; suffix equals source
+vintage rows,PASS,2 indicators
+SP.DYN.LE00.IN: lastupdated matches API header,PASS,2026-10-08 vs 2026-10-08
+NY.GDP.PCAP.PP.KD: lastupdated matches API header,PASS,2026-10-08 vs 2026-10-08
 indicator merge,PASS,266 both; no unmatched indicator keys
 metadata join row accounting,PASS,"296 full rows; 266 both, 30 metadata only, 0 indicators only"
 unmatched rows are aggregates,PASS,All 30 metadata-only rows are aggregates
 all analysis years,PASS,2023 only
 plausibility: life expectancy,PASS,Observed life expectancy >0 and <=120 years
 plausibility: GDP,PASS,All observed GDP values >0
-all counts equal frozen manifest,PASS,"{'metadata_rows': 296, 'life_rows': 266, 'gdp_rows': 266, 'economies': 217, 'life_missing': 0, 'gdp_missing': 20, 'complete_cases': 197, 'max_note_bytes': 1342}"
+all counts equal frozen manifest,PASS,"{'metadata_rows': 296, 'life_rows': 266, 'gdp_rows': 266, 'economies': 217, 'life_missing': 0, 'gdp_missing': 20, 'complete_cases': 197, 'max_note_bytes': 1342, 'vintage_rows': 2}"
 reference CSV reread,PASS,217 exported rows
 reference numeric round trip,PASS,All exported numeric fields recover identical binary64 values; missing values preserved
 model reference sample,PASS,197 complete cases and finite coefficients

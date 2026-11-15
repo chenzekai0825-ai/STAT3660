@@ -6,6 +6,8 @@
 
 原始文件保留API原始字节，不重新序列化。下载和重建分离，SAS不依赖网络。准确下载时间（香港时区）、URL、SHA-256、字节数和API版本头见 `data/raw/manifest.json`。数据会被来源修订，使用归档快照才能复现本次数据。
 
+`FILE_SHA256.txt` 覆盖仓库中除它自己以外的所有文件，**唯一例外是 `data/input/economies.xlsx`**：openpyxl 每次重建都会写入新的 zip 时间戳，字节级哈希会变，但单元格内容不变。因此该文件改用更严的核对方式——`tools/validate_inputs.py` 把它逐单元格与原始 `countries.json` 对照（296 行 × 6 字段全等），而不是比哈希。CSV 与 DAT 每行格式固定，重建后字节完全一致，已纳入哈希清单。
+
 | 原始文件 | 官方下载地址 |
 |---|---|
 | countries.json | https://api.worldbank.org/v2/country?format=json&per_page=400 |
@@ -20,11 +22,12 @@
 
 本项目的三种输入格式是**由上述同一套真实公开数据透明转换而来**，不是三个独立调查，不暗示世界银行直接发布了这些DAT/Excel文件。
 
-1. `countries.json` → `economies.xlsx`：`tools/build_metadata.mjs`选取代码、名称、地区、收入组，将 `region.id == 'NA'` 记为汇总项1，其余0。按代码排序；单工作表 `Economies`，首行是6个变量名，全部296行保留。名称、地区等源文本保留原样。收入组只作为目录信息，不作为2023历史收入分类分析。
-2. `life_2023.json` → `life_expectancy.csv`：`tools/prepare_inputs.py`选取代码、年份、数值。JSON null写为空字段，原数值以可往返解析的十进制写出。`period_start_raw=2023-01-01`是从年度派生的**年度标记日期**，并非实际测量或采集日。
+1. `countries.json` → `economies.xlsx`：`tools/prepare_inputs.py` 用 openpyxl 选取代码、名称、地区、收入组，将 `region.id == 'NA'` 记为汇总项1，其余0。按代码排序；单工作表 `Economies`，首行是6个变量名，全部296行保留。名称、地区等源文本保留原样（含源数据自带的行尾空格）。收入组只作为目录信息，不作为2023历史收入分类分析。
+2. `life_2023.json` → `life_expectancy.csv`：同一脚本选取代码、年份、数值。JSON null写为空字段，原数值以可往返解析的十进制写出。`period_start_raw=2023-01-01`是从年度派生的**年度标记日期**，并非实际测量或采集日。
 3. `gdp_2023.json` → `gdp_ppp.dat`：同脚本将每条记录写成44字节ASCII固定宽度行，无表头。代码列1–3，空格4，年份5–8，空格9，年度标记日期10–19，空格20，GDP数值或NA列21–44（右对齐）。数值用17位有效数字，避免粗略四舍五入；null写为NA。
-4. 两个 `*_metadata.json` 的 `sourceNote` → `indicator_notes.csv`：保留真实说明，规范化真实换行、字面 `\n` 和空白为单空格，变为一行CSV。附独立计算的UTF-8字节数和末40字符。最长说明1342字节；SAS用4096字节接收并核对长度和结尾。故意生成200字节副本只用于展示截断损失，不进入研究分析。原说明仍在JSON中。
-5. 个别汇总项在指标API的 `countryiso3code` 为空。用其 `country.id`（两位WB代码）连接目录的 `iso2Code`，取目录 `id`；不使用名称猜测。两指标各5条映射保存为 `key_mapping_audit.csv`。`iso3`变量实际指**三字符World Bank代码**，不保证每个条目都是ISO主权国家代码。
+4. 两个 `*_metadata.json` 的 `sourceNote` → `indicator_notes.csv`：保留真实说明，规范化真实换行、字面 `\n` 和空白为单空格，变为一行CSV。**只保留源数据提供的两列**（`indicator_id`, `description`），不预先写入任何"正确答案"列；长度、是否被200字节截断、截断损失多少字节，全部在SAS里现场算出。最长说明1,342字节，SAS用`$4096`接收，同一条记录再用`$200`接收以证明截断会发生。原说明仍在JSON中。
+5. `*_metadata.json` 的 `lastupdated` 与 `manifest.json` 的下载时间 → `indicator_vintage.csv`：这是本项目**真实日期**的来源。`last_updated` 是世界银行API响应头里的 `lastupdated`（2026-10-08），`retrieved_date` 是我们实际下载快照的日期（2026-11-08）。两列都以 `YYMMDD10.` 读成SAS日期，并可算出"源更新到我们下载之间相隔多少天"。年度标记日期（2023-01-01）只是期间标记，不冒充采集日。
+6. 个别汇总项在指标API的 `countryiso3code` 为空。用其 `country.id`（两位WB代码）连接目录的 `iso2Code`，取目录 `id`；不使用名称猜测。两指标各5条映射保存为 `key_mapping_audit.csv`。`iso3`变量实际指**三字符World Bank代码**，不保证每个条目都是ISO主权国家代码。
 
 ## 字段字典和键
 
@@ -49,6 +52,8 @@
 | complete_case | 数值 | 可纳入回归1；否则0 |
 | exclusion_reason | 字符100 | 纳入或排除原因；最终CSV保留全部经济体 |
 | indicator_id / description | 字符24 / 4096 | 指标代码、规范化后的原始长说明 |
+| indicator_id / indicator_name | 字符24 / 80 | `indicator_vintage.csv`：指标代码与官方名称 |
+| last_updated / retrieved | SAS数值日期 | 源系列最后更新日（API `lastupdated`）与我们下载快照的日期 |
 
 SAS先按(iso3,year)完整连接两个指标，再按iso3完整连接目录。由于固定单一年份，指标合并表也对iso3唯一；代码会验证这一点。所有重复键均导出并停止运行，不通过删重掩盖问题。30条仅目录记录均为汇总项，审计后随其余49个汇总项一起排除。指标null仍是“有记录但数值缺失”，不记作连接失败。
 
@@ -57,4 +62,5 @@ SAS先按(iso3,year)完整连接两个指标，再按iso3完整连接目录。�
 - 描述统计：各变量分别使用可用数据，输出N、缺失N、均值、样本标准差、最小/最大值、四分位数和中位数。SAS `QNTLDEF=5`；Python用`averaged_inverted_cdf`核对。
 - 回归：217经济体中197完整案例，每经济体权重相同。斜率表示GDP增加一个自然对数单位所关联的寿命变化；GDP翻倍对应 `beta × ln(2)` 年的拟合差异。不能外推为个人收入效应或因果效应。
 - 诊断：常规OLS估计、普通ANOVA和CLB区间；HC3稳健标准误/检验；SPEC联合设定检验；残差图、正态Q-Q、Cook距离、杠杆值和外部学生化残差。Cook D>4/N、杠杆值>2p/N（p=2）、|外部学生化残差|>2仅标记，不自动排除。
+- 推断：`35_inference.sas` 回答"组间差异是否大于随机波动"——地区间Kruskal-Wallis检验、单因素ANOVA（含Levene方差齐性与Welch校正）、高收入组对其余经济体的双样本t检验、Pearson与Spearman相关。这些检验与回归回答的是不同问题，报告里分开陈述（见 `docs/REPORT_DRAFT.md` 第4节）。
 - 完整案例可能不同于缺失GDP的经济体；地理依赖、未纳入混杂因素与线性设定均限制推断。区域分组来自当前目录。参考Python诊断的具体检验不冒充SAS SPEC，正式解释以实际SAS输出为准。

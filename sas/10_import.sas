@@ -53,22 +53,46 @@ data proj.gdp_input;
   format gdp_date yymmdd10. gdp_ppp best32.;
 run;
 
-/* [I4] Real source descriptions: read with $4096, then compare byte length and
-   end-of-string against independently prepared reference fields. short_copy
-   intentionally demonstrates loss with $200; it is never used for analysis. */
+/* [I4] Real source definitions (the World Bank sourceNote). These are long free
+   text: 1,342 bytes for one indicator. A $200 buffer - a common default - cuts
+   the definition mid-sentence. The audit proves the loss instead of asserting it. */
 data proj.notes_import;
-  length indicator_id $24 description $4096 expected_suffix $40 short_copy $200;
+  length indicator_id $24 description $4096 short_copy $200;
   infile "&input_dir/indicator_notes.csv" dsd dlm=',' firstobs=2
          lrecl=32767 truncover encoding='utf-8';
-  input indicator_id :$24. description :$4096. expected_bytes :8. expected_suffix :$40.;
+  input indicator_id :$24. description :$4096.;
   actual_bytes=lengthn(description);
-  short_copy=description;
+  short_copy=description;            /* silently keeps only the first 200 bytes */
   short_bytes=lengthn(short_copy);
-  bytes_lost_if_200=actual_bytes-short_bytes;
-  length_ok=(actual_bytes=expected_bytes);
-  suffix_ok=(substrn(description,max(1,actual_bytes-39))=expected_suffix);
-run;
+  bytes_lost=actual_bytes-short_bytes;
+  truncated=(bytes_lost>0);
+  run;
 %export_csv(proj.notes_import,long_field_audit);
+
+/* [I5] Real vintage dates: the API response header reports when the indicator
+   series was last updated (lastupdated), and the download manifest reports when
+   we retrieved it. Both are read as SAS dates, not as text. */
+data proj.vintage_input;
+  length indicator_id $24 indicator_name $80 last_updated_raw $10 retrieved_raw $10;
+  infile "&input_dir/indicator_vintage.csv" dsd dlm=',' firstobs=2
+         lrecl=8192 truncover encoding='utf-8';
+  input indicator_id :$24. indicator_name :$80.
+        last_updated_raw :$10. retrieved_raw :$10.;
+  last_updated=input(last_updated_raw,?? yymmdd10.);
+  retrieved=input(retrieved_raw,?? yymmdd10.);
+  days_since_update=retrieved-last_updated;
+  invalid_date=(missing(last_updated) or missing(retrieved)
+                or retrieved<last_updated
+                or put(last_updated,yymmdd10.) ne last_updated_raw
+                or put(retrieved,yymmdd10.) ne retrieved_raw);
+  format last_updated retrieved yymmdd10.;
+  label indicator_id='Indicator code' indicator_name='Indicator'
+        last_updated='Series last updated by the source'
+        retrieved='Date we downloaded the snapshot'
+        days_since_update='Days between source update and retrieval';
+run;
+%export_csv(proj.vintage_input,indicator_vintage_audit);
+
 data proj.parse_issues;
   length input_name $12;
   set proj.life_input(in=l) proj.gdp_input(in=g);
@@ -77,26 +101,30 @@ data proj.parse_issues;
 run;
 %export_csv(proj.parse_issues,parse_issues);
 proc sql noprint;
-  select sum(not length_ok or not suffix_ok), max(actual_bytes)
-    into :bad_notes trimmed, :longest_note trimmed from proj.notes_import;
+  select sum(truncated), max(actual_bytes)
+    into :notes_truncated trimmed, :longest_note trimmed from proj.notes_import;
   select sum(invalid_date),sum(invalid_value) into :bad_life_dates trimmed,:bad_life_values trimmed from proj.life_input;
   select sum(invalid_date),sum(invalid_value),sum(invalid_width)
     into :bad_gdp_dates trimmed,:bad_gdp_values trimmed,:bad_widths trimmed from proj.gdp_input;
+  select sum(invalid_date) into :bad_vintage_dates trimmed from proj.vintage_input;
 quit;
-%assert_equal(Long field integrity,&bad_notes,0);
+%assert_equal(Definitions cut by a 200-byte buffer,&notes_truncated,1);
 %assert_equal(Longest source description bytes,&longest_note,&expected_max_note_bytes);
 %assert_equal(CSV date parsing,&bad_life_dates,0);
 %assert_equal(CSV numeric parsing,&bad_life_values,0);
 %assert_equal(DAT date parsing,&bad_gdp_dates,0);
 %assert_equal(DAT numeric parsing,&bad_gdp_values,0);
 %assert_equal(DAT fixed record widths,&bad_widths,0);
+%assert_equal(Vintage date parsing,&bad_vintage_dates,0);
 %assert_rows(proj.economies,&expected_metadata_rows,Excel row count);
 %assert_rows(proj.life_input,&expected_life_rows,CSV row count);
 %assert_rows(proj.gdp_input,&expected_gdp_rows,DAT row count);
+%assert_rows(proj.vintage_input,&expected_vintage_rows,Vintage row count);
 
 proc contents data=proj.life_input out=proj.life_types noprint; run;
 proc contents data=proj.gdp_input out=proj.gdp_types noprint; run;
-data proj.input_types; set proj.meta_types proj.life_types proj.gdp_types; run;
+proc contents data=proj.vintage_input out=proj.vintage_types noprint; run;
+data proj.input_types; set proj.meta_types proj.life_types proj.gdp_types proj.vintage_types; run;
 %export_csv(proj.input_types,input_types);
 data proj.date_audit;
   set proj.life_input(keep=iso3 year period_start_raw period_start invalid_date);
@@ -107,8 +135,13 @@ run;
 %export_csv(proj.date_audit,date_audit);
 title 'Import audit: dates and numeric types, 2023 annual data';
 proc print data=proj.date_audit(obs=8) noobs label; run;
-title 'Real source notes: full-width read versus intentionally short 200-byte copy';
+title 'Real source definitions: a full 4096-byte read versus a 200-byte buffer';
 proc print data=proj.notes_import noobs label;
-  var indicator_id expected_bytes actual_bytes short_bytes bytes_lost_if_200 length_ok suffix_ok;
+  var indicator_id actual_bytes short_bytes bytes_lost truncated;
+run;
+title 'Real source vintage dates read as SAS dates';
+proc print data=proj.vintage_input noobs label;
+  var indicator_id indicator_name last_updated retrieved days_since_update;
+  format last_updated retrieved yymmdd10.;
 run;
 title;

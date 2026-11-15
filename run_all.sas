@@ -2,15 +2,19 @@
    Edit ONLY project_root below. Upload the entire folder to SAS Studio first.
    Requires Base SAS 9.4, SAS/STAT, ODS Graphics and DBMS=XLSX support.
    Save this program as UTF-8; run the WHOLE program in a fresh SAS session. */
-%let project_root=/home/YOUR_USER/stat3660sef-group-project;
+/* SAS OnDemand for Academics puts your uploaded files under /home/&sysuserid,
+   so this default works there as soon as the folder is called STAT3660.
+   Change it if you uploaded the folder somewhere else. */
+%let project_root=/home/&sysuserid/STAT3660;
 
 %let study_year=2023;
 %let input_dir=&project_root/data/input;
 %let out=&project_root/results/sas;
 options validvarname=v7 mprint mlogic symbolgen nofmterr;
 %macro preflight;
-  %if not %sysfunc(fileexist(&input_dir/economies.xlsx)) %then %do;
-    %put ERROR: Set project_root to the uploaded SAS server folder containing data/input/economies.xlsx.;
+  %if not %sysfunc(fileexist("&input_dir/economies.xlsx")) %then %do;
+    %put ERROR: Set project_root to the uploaded SAS server folder that contains data/input/economies.xlsx.;
+    %put ERROR: project_root is currently &project_root;
     %abort cancel;
   %end;
 %mend;
@@ -41,6 +45,8 @@ ods graphics on / reset=all outputfmt=png width=9in height=5.5in;
 %check_step(Merge);
 %include "&project_root/sas/30_analysis.sas";
 %check_step(Analysis);
+%include "&project_root/sas/35_inference.sas";
+%check_step(Inference);
 
 %export_csv(proj.analysis_all,final_analysis);
 %export_csv(proj.assertions,assertions);
