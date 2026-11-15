@@ -1,0 +1,4 @@
+Model,Dependent,Label1,cValue1,nValue1,Label2,cValue2,nValue2
+MODEL1,life_exp,均方根误差,3.61339,3.613387,R 方,0.7419,0.741913
+MODEL1,life_exp,因变量均值,73.47408,73.474082,调整 R 方,0.7406,0.740590
+MODEL1,life_exp,变异系数,4.91791,4.917907,,,0

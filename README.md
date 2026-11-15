@@ -4,11 +4,15 @@
 
 使用世界银行 WDI 的公开年度数据。以经济体为单位，包括香港等地区，排除汇总区域；每个经济体等权。描述统计使用各变量的非缺失观测，回归使用完整案例。回归式为 `life_exp = intercept + beta × ln(gdp_ppp)`，关联不作因果解释。
 
-## 执行状态（必读）
+## 执行状态
 
-- **输入数据、校验脚本、SAS 源码已完成**；Python 参考分析已实际运行，45 项输入检查全部通过（见 `docs/VALIDATION.md`）。
-- **SAS 尚未在本仓库执行过。** `results/sas/` 目前是空的占位目录，没有日志、没有 HTML、没有 CSV/PNG。第一次在 SAS Studio 跑通并检查日志，是提交前的第一优先级。
-- **书面报告与 PPT 尚未完成**；`docs/REPORT_DRAFT.md` 与 `docs/PPT_OUTLINE.md` 是可直接填充的骨架，数字来自 SAS 运行结果。
+- **SAS 已实际运行并通过全部断言**：SAS 9.04.01M8P02222023，2026-11-16 跑完，`results/sas/RUN_STATUS.txt` 首行为 `COMPLETED`，`run_all.log` 中 **0 ERROR / 0 WARNING**，29 项断言全部 `passed=1`。
+- 输入侧另有 45 项独立 Python 核对，见 `docs/VALIDATION.md`。
+- 报告与 PPT 骨架已用真实 SAS 输出填好：`docs/REPORT_DRAFT.md`（15 页）、`docs/PPT_OUTLINE.md`（12 页 + Q&A）。
+- 已知两个可接受的小瑕疵，均已处理：
+  1. `04_residual_normal_qq.png` 本次未落到磁盘（PROC UNIVARIATE 的 QQ 图不遵循 `imagename`），已用 `tools/extract_pngs.py` 从 `analysis.html` 提取；
+  2. `07_life_by_region_mean_clm` 的 `DATALABEL` 会把三个统计量以全精度叠印在坐标轴上，已在该图去掉 `DATALABEL`（重跑后即生效）。
+  图表对照见 `docs/FIGURE_MAP.md`。
 
 ## 最短运行步骤（SAS Studio）
 
@@ -34,12 +38,13 @@
 | `sas/snapshot_expectations.sas` | 由冻结原始数据生成的预期行数 |
 | `data/raw/` | 5 份原始 API JSON、下载链接、时间与 SHA-256 清单 |
 | `data/input/` | SAS 实际输入：`economies.xlsx`、`life_expectancy.csv`、`gdp_ppp.dat`、`indicator_notes.csv`、`indicator_vintage.csv`；另附代码映射审计 |
-| `results/sas/` | SAS 运行后：日志、HTML、CSV、PNG 与永久数据集 |
+| `results/sas/` | 真实 SAS 输出：日志、HTML、CSV、PNG（`figures/` 为从 HTML 提取的图） |
 | `validation/python_reference/` | 本地实际执行的 Python 参考数据、统计表与图表 |
 | `docs/DATA_SOURCES.md` | 来源、转换规则、字段字典、连接键与研究限制 |
 | `docs/VALIDATION.md` | 实际本地验证结果与 SAS 尚待验证项 |
 | `docs/REPORT_DRAFT.md` | 15 页报告骨架（按评分表的六节结构） |
-| `docs/PPT_OUTLINE.md` | 10 分钟汇报的 12 页大纲与分工 |
+| `docs/PPT_OUTLINE.md` | 10 分钟汇报的 12 页大纲与分工，数字已填好 |
+| `docs/FIGURE_MAP.md` | 17 张提取图与 7 张报告图的对照表 |
 | `tools/` | 重建输入（openpyxl）、独立验证、下载后 SAS 输出验收、从 HTML 提取图 |
 
 数据来源及定义：[预期寿命](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)、[人均 GDP PPP（2021 年不变国际元）](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)、[经济体 API](https://api.worldbank.org/v2/country?format=json&per_page=400)。保存的 WDI 返回头显示更新于 **2026-10-08**，下载于 **2026-11-08**；选用固定 2023 年截面，下载日期和文件哈希见 `data/raw/manifest.json`。

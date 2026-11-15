@@ -108,7 +108,10 @@ ods graphics / reset=index imagename='07_life_by_region_mean_clm'
 title "Mean life expectancy by region with 95% confidence limits (&study_year)";
 footnote 'Whiskers are 95% confidence limits of the mean, not ±1.5 IQR; small regions have wide whiskers.';
 proc sgplot data=proj.analysis_all;
-    vbar region / response=life_exp stat=mean limitstat=clm alpha=0.05 datalabel;
+    /* DATALABEL is deliberately omitted: with LIMITSTAT=CLM SAS labels all
+       three statistics (lower, mean, upper) at full precision, which overprints
+       the axis. The numbers are in region_summary.csv and the printed table. */
+    vbar region / response=life_exp stat=mean limitstat=clm alpha=0.05;
     xaxis label='World Bank region (download snapshot)' fitpolicy=rotate;
     yaxis label='Mean life expectancy at birth (years)' grid;
 run;

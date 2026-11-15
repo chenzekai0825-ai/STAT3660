@@ -1,0 +1,30 @@
+check_name,actual,expected,passed
+Excel field types,6,6,1
+Definitions cut by a 200-byte buffer,1,1,1
+Longest source description bytes,1342,1342,1
+CSV date parsing,0,0,1
+CSV numeric parsing,0,0,1
+DAT date parsing,0,0,1
+DAT numeric parsing,0,0,1
+DAT fixed record widths,0,0,1
+Vintage date parsing,0,0,1
+Excel row count,296,296,1
+CSV row count,266,266,1
+DAT row count,266,266,1
+Vintage row count,2,2,1
+Unique key metadata,0,0,1
+Unique key life,0,0,1
+Unique key gdp,0,0,1
+Nonmissing keys and correct year,0,0,1
+Unique key indicator_merge,0,0,1
+Unique key indicator_iso3,0,0,1
+Indicator rows lacking metadata,0,0,1
+Dates agree across indicators,0,0,1
+Full merge preserves metadata rows,296,296,1
+Unique key analysis,0,0,1
+Eligible economy count,217,217,1
+Complete cases,197,197,1
+Missing life expectancy,0,0,1
+Missing GDP,20,20,1
+Out of domain observations,0,0,1
+Region summary rows,7,7,1

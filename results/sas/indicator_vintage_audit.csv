@@ -1,0 +1,3 @@
+indicator_id,indicator_name,last_updated_raw,retrieved_raw,last_updated,retrieved,days_since_update,invalid_date
+SP.DYN.LE00.IN,"Life expectancy at birth, total (years)",2026-10-08,2026-11-08,2026-10-08,2026-11-08,31,0
+NY.GDP.PCAP.PP.KD,"GDP per capita, PPP (constant 2021 international $)",2026-10-08,2026-11-08,2026-10-08,2026-11-08,31,0

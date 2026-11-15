@@ -1,0 +1,8 @@
+region,_TYPE_,_FREQ_,n_economies,mean_life,sd_life,se_life,min_life,median_life,max_life,lclm_mean,uclm_mean
+East Asia & Pacific,1,37,37,73.96,6.38,1.05,62.11,72.85,85.25,71.83,76.09
+Europe & Central Asia,1,58,58,79.05,4.23,0.56,70.07,79.71,86.37,77.94,80.16
+Latin America & Caribbean,1,42,42,75.38,3.66,0.56,64.94,75.53,81.69,74.24,76.52
+"Middle East, North Africa, Afghanistan & Pakistan",1,23,23,75.48,6.12,1.28,65.17,76.51,83.36,72.83,78.13
+North America,1,3,3,80.77,2.10,1.21,78.39,81.63,82.31,75.57,85.98
+South Asia,1,6,6,74.75,3.93,1.60,70.35,73.82,81.04,70.63,78.87
+Sub-Saharan Africa,1,48,48,64.56,4.60,0.66,54.46,64.10,76.06,63.22,65.89
