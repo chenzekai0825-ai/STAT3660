@@ -22,8 +22,10 @@ causal effect**.
 - Inputs are additionally verified by 45 independent Python checks that never read SAS output
   (see `docs/VALIDATION.md`). The two verifications agree: intercept 22.56709, slope 5.26717,
   R² 0.7419, RMSE 3.61339, N = 197.
-- Written report: `docs/STAT3660_Report.docx` (15 pages max, 7 figures, 9 tables).
-- Presentation: `docs/STAT3660_Slides.pptx` (12 slides, speaker notes included).
+- Written report and slide deck are **built locally and deliberately not committed**
+  (`docs/*.docx` and `docs/*.pptx` are in `.gitignore`): they are submitted to OLE, not kept in the
+  repository. Regenerate them at any time with the two builders listed under *Reproducing everything*.
+  The group has five members.
 
 Two minor blemishes, both handled and documented:
 
@@ -82,11 +84,7 @@ Two minor blemishes, both handled and documented:
 | `validation/python_reference/` | Python reference tables and charts used to cross-check the numbers |
 | `docs/DATA_SOURCES.md` | Sources, conversion rules, field dictionary, join keys and research limits |
 | `docs/VALIDATION.md` | What has been verified, by which engine, and what has not |
-| `docs/REPORT_DRAFT.md` | Planning draft of the report (Chinese; same content as the .docx) |
-| `docs/PPT_OUTLINE.md` | Planning draft of the deck, with speaker notes and Q&A prep (Chinese) |
 | `docs/FIGURE_MAP.md` | Which extracted figure goes where in the report |
-| `docs/STAT3660_Report.docx` | The written report (English, 7 figures, 9 tables) |
-| `docs/STAT3660_Slides.pptx` | The slide deck (English slides, speaker notes) |
 | `tools/` | Input rebuild, independent validation, output checks, figure extraction, document build |
 
 ---
@@ -211,8 +209,8 @@ while the cell contents do not. That file is therefore verified cell by cell aga
 ## Notes
 
 - The written report and the slides are in **English**, matching the course materials, the rubric and
-  every axis label produced by SAS. The two planning drafts (`docs/REPORT_DRAFT.md`,
-  `docs/PPT_OUTLINE.md`) are in Chinese; they carry the same content and are kept for the team.
+  every axis label produced by SAS. The repository contains no Chinese text: documentation, code
+  comments and generated reports are all in English.
 - The documents are generated from `results/sas/`, so re-running SAS and then re-running the two
   builders keeps text and tables in step. Statistics that SAS prints to `analysis.html` but does not
   export (Kruskal-Wallis, ANOVA, Levene, Welch, the t test, the correlations and the SPEC test) are

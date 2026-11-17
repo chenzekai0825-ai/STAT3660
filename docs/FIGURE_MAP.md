@@ -1,25 +1,31 @@
-# 图表对照表（本次 SAS 运行产出）
+# Figure map (output of the recorded SAS run)
 
-`results/sas/` 里的 PNG 由图名直接标识（`01`–`07`）。其中 **`04_residual_normal_qq.png` 本次没有落到磁盘**（PROC UNIVARIATE 的 QQ 图未按 imagename 写出），已由 `tools/extract_pngs.py` 从 `analysis.html` 补齐。
+The PNG files in `results/sas/` are identified by name (`01` to `07`). **`04_residual_normal_qq.png`
+was missing from disk in the first run** because `PROC UNIVARIATE` ignores `IMAGENAME`; it is
+recovered from `analysis.html` by `tools/extract_pngs.py`.
 
-运行 `python3 tools/extract_pngs.py results/sas` 会在 `results/sas/figures/` 生成 17 张按文档顺序编号的图，对照如下：
+Running `python3 tools/extract_pngs.py results/sas` writes 17 figures, numbered in document order,
+into `results/sas/figures/`:
 
-| 提取文件 | 对应 SAS 图 | 内容 | 报告/PPT 用途 |
+| Extracted file | SAS figure | Content | Use |
 |---|---|---|---|
-| figure_01.png | `01_income_life_scatter` | ln(人均GDP) 与预期寿命散点 + OLS 拟合线（N=197） | **报告图 1**、PPT 第 7 页 |
-| figure_02.png | `02_life_expectancy_by_region` | 七个地区的寿命箱线图 | **报告图 2**（Dataset 节配图）、PPT 第 9 页 |
-| figure_03.png | `03_residuals_vs_fitted` | 残差 vs 拟合值 | 报告图 3（诊断） |
-| figure_04.png | `04_residual_normal_qq` | 残差正态 Q-Q 图（**仅有提取版**） | 报告图 4（诊断） |
-| figure_05.png | `05_cooks_distance` | Cook 距离 + 4/N 参考线 | 报告图 5（诊断） |
-| figure_06.png | `06_leverage_studentized_residual` | 杠杆值 vs 外部学生化残差 | 报告图 6（诊断） |
-| figure_07.png | — | NPAR1WAY：按地区的寿命箱线图 | 备选 |
-| figure_08–12.png | — | NPAR1WAY 的 Wilcoxon / 中位数 / Van der Waerden / Savage / EDF 评分图 | 备选，答辩可用来说明"换评分方式结论不变" |
-| figure_13–14.png | — | GLM 的地区均值拟合图与分布图 | 备选 |
-| figure_15–16.png | — | TTEST 的汇总面板与 Q-Q 图 | 备选 |
-| figure_17.png | `07_life_by_region_mean_clm` | 地区均值 + 95% 置信限柱状图 | **报告图 7**、PPT 第 8 页 |
+| figure_01.png | `01_income_life_scatter` | Life expectancy against ln(GDP per capita), with the OLS line (N = 197) | **Report figure 3**, deck slide 7 |
+| figure_02.png | `02_life_expectancy_by_region` | Box plot of life expectancy by region | **Report figure 1** (the dataset figure), deck slide 9 |
+| figure_03.png | `03_residuals_vs_fitted` | Residuals against fitted values | Report figure 4 (top left) |
+| figure_04.png | `04_residual_normal_qq` | Normal Q-Q plot of the residuals (**extracted copy only**) | Report figure 4 (top right) |
+| figure_05.png | `05_cooks_distance` | Cook's distance with the 4/N reference line | Report figure 4 (bottom left) |
+| figure_06.png | `06_leverage_studentized_residual` | Leverage against externally studentized residuals | Report figure 4 (bottom right) |
+| figure_07.png | — | NPAR1WAY box plot of life expectancy by region | optional |
+| figure_08-12.png | — | NPAR1WAY Wilcoxon, median, Van der Waerden, Savage and EDF plots | optional; useful in Q&A to show the conclusion does not depend on the scoring function |
+| figure_13-14.png | — | GLM region mean plot and distribution plot | optional |
+| figure_15-16.png | — | TTEST summary panel and Q-Q plot | optional |
+| figure_17.png | `07_life_by_region_mean_clm` | Region means with 95% confidence limits | **Report figure 2**, deck slide 8 |
 
-## 注意
+## Notes
 
-- 报告只需要 7 张：图 1、2、7（主结果）+ 图 3–6（诊断）。其余是 SAS 附带的默认图，**不要全部塞进 15 页报告**。
-- 插入 Word 前把 `figure_NN.png` 重命名为 `fig1_scatter.png` 这类可读名字，并在图注里写清 N 和数据年份。
-- 如果重新跑过 SAS，`figures/` 里的顺序可能与上表不同——重跑后先看 `extract_pngs.py` 打印的 alt 文本再对号。
+- The report needs seven figures: figures 1, 2 and 17 as the main results, plus figures 3 to 6 as the
+  diagnostics. The remaining SAS defaults should **not** be pasted into a 15-page report.
+- Rename them to something readable (for example `fig_scatter.png`) before inserting them into Word,
+  and state N and the data year in every caption.
+- If SAS is re-run, the numbering inside `figures/` can change: read the captions printed by
+  `extract_pngs.py` before matching them to this table.

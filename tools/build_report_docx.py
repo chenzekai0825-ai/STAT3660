@@ -46,12 +46,15 @@ desc = rows('descriptive_statistics.csv')
 regions = [r for r in rows('region_summary.csv') if r.get('_TYPE_') in ('1', '')]
 extremes = rows('life_expectancy_extremes.csv')
 params = rows('regression_parameters.csv')
-# regression_fit.csv puts two label/value pairs on each row, so both must be read.
-fit = {}
-for _row in rows('regression_fit.csv'):
-    for _label, _value in ((_row['Label1'], _row['nValue1']), (_row['Label2'], _row['nValue2'])):
-        if _label.strip():
-            fit[_label.strip()] = num(_value)
+# regression_fit.csv holds two label/value pairs per row. They are read by POSITION, never by
+# label: SAS localises those labels to the session language, positions do not change.
+#   row 1: cValue1 = root mean square error, cValue2 = R-squared
+#   row 2: cValue1 = mean of the dependent,  cValue2 = adjusted R-squared
+_fit = rows('regression_fit.csv')
+rmse = num(_fit[0]['cValue1'])
+r2 = num(_fit[0]['cValue2'])
+dep_mean = num(_fit[1]['cValue1'])
+adj_r2 = num(_fit[1]['cValue2'])
 diag = rows('regression_diagnostics.csv')
 vintage = rows('indicator_vintage_audit.csv')
 notes = rows('long_field_audit.csv')
@@ -72,8 +75,6 @@ n_missing_gdp = int(overall['gdp_ppp']['n_missing'])
 p_int = next(p for p in params if p['Variable'] == 'Intercept')
 p_slope = next(p for p in params if p['Variable'] == 'log_gdp')
 slope = num(p_slope['Estimate'])
-r2 = num(fit.get('R 方'), 0.7419)
-rmse = num(fit.get('均方根误差'), 3.61339)
 n_model = len(diag)
 flagged = [d for d in diag if d.get('flag_any') == '1']
 cook_flags = [d for d in diag if d.get('flag_cook') == '1']
@@ -529,7 +530,7 @@ table(doc,
         f'[{num(p_slope["HCLowerCL"]):.3f}, {num(p_slope["HCUpperCL"]):.3f}]']],
       widths=[3.6, 2.0, 1.6, 1.8, 3.0, 3.0, 3.0], font_size=8.5)
 caption(doc, f'Table 8  OLS estimates, N = {n_model}. R-squared = {r2:.4f}, adjusted R-squared = '
-             f'{num(fit.get("调整 R 方"), 0.7406):.4f}, root mean square error = {rmse:.3f} years.')
+             f'{adj_r2:.4f}, root mean square error = {rmse:.3f} years.')
 
 body(doc, f'The slope is the quantity of interest. A one-unit increase in ln(GDP per capita) is '
           f'associated with {slope:.2f} more years of life expectancy; since ln(2) = 0.693, doubling '

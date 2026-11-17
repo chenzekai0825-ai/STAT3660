@@ -1,0 +1,9 @@
+# Local deliverables: submitted to OLE, not kept in the repository.
+docs/*.docx
+docs/*.pptx
+docs/~$*
+
+# Local artefacts
+.DS_Store
+__pycache__/
+*.pyc
