@@ -1,102 +1,219 @@
-# STAT 3660SEF 小组项目：2023 年经济水平与预期寿命
+# STAT 3660SEF Group Project — Income and Life Expectancy in 2023
 
-**研究问题：2023 年各经济体的人均实际 GDP（购买力平价）与出生时预期寿命有什么关联？各地区的寿命分布有何差异？收入水平的差异能不能解释这些地区差异？**
+**Research question.** How strongly is GDP per capita (PPP) associated with life expectancy at
+birth across economies in 2023? Do the seven World Bank regions actually differ in longevity, and
+are those differences larger than sampling noise? And where does the income–longevity regularity
+visibly fail?
 
-使用世界银行 WDI 的公开年度数据。以经济体为单位，包括香港等地区，排除汇总区域；每个经济体等权。描述统计使用各变量的非缺失观测，回归使用完整案例。回归式为 `life_exp = intercept + beta × ln(gdp_ppp)`，关联不作因果解释。
+The unit of analysis is the **economy**, not the individual, so every economy carries equal weight.
+All figures come from a single 2023 cross-section, which avoids mixing "latest available year"
+values collected up to a decade apart. Descriptive statistics use each variable's non-missing
+observations; the regression uses complete cases. The estimated relation is
+`life_exp = intercept + beta × ln(gdp_ppp)` and it is reported as an **association, never as a
+causal effect**.
 
-## 执行状态
+---
 
-- **SAS 已实际运行并通过全部断言**：SAS 9.04.01M8P02222023，2026-11-16 跑完，`results/sas/RUN_STATUS.txt` 首行为 `COMPLETED`，`run_all.log` 中 **0 ERROR / 0 WARNING**，29 项断言全部 `passed=1`。
-- 输入侧另有 45 项独立 Python 核对，见 `docs/VALIDATION.md`。
-- 报告与 PPT 骨架已用真实 SAS 输出填好：`docs/REPORT_DRAFT.md`（15 页）、`docs/PPT_OUTLINE.md`（12 页 + Q&A）。
-- 已知两个可接受的小瑕疵，均已处理：
-  1. `04_residual_normal_qq.png` 本次未落到磁盘（PROC UNIVARIATE 的 QQ 图不遵循 `imagename`），已用 `tools/extract_pngs.py` 从 `analysis.html` 提取；
-  2. `07_life_by_region_mean_clm` 的 `DATALABEL` 会把三个统计量以全精度叠印在坐标轴上，已在该图去掉 `DATALABEL`（重跑后即生效）。
-  图表对照见 `docs/FIGURE_MAP.md`。
+## Status
 
-## 最短运行步骤（SAS Studio）
+- **SAS has been run and passed.** SAS 9.04.01M8P02222023, 16 November 2026.
+  `results/sas/RUN_STATUS.txt` starts with `COMPLETED`, `run_all.log` contains **0 ERROR and
+  0 WARNING**, and all **29 automated assertions** report `passed=1`.
+- Inputs are additionally verified by 45 independent Python checks that never read SAS output
+  (see `docs/VALIDATION.md`). The two verifications agree: intercept 22.56709, slope 5.26717,
+  R² 0.7419, RMSE 3.61339, N = 197.
+- Written report: `docs/STAT3660_Report.docx` (15 pages max, 7 figures, 9 tables).
+- Presentation: `docs/STAT3660_Slides.pptx` (12 slides, speaker notes included).
 
-1. 把整个 `STAT3660/` 目录上传到 SAS Studio **服务器端**文件区，保留目录结构（`data/`, `sas/`, `run_all.sas`）。
-2. 使用支持 Base SAS 9.4、SAS/STAT、ODS Graphics、`PROC IMPORT DBMS=XLSX` 的会话。建议 UTF-8 会话。
-3. 打开 `run_all.sas`。默认路径是 `/home/&sysuserid/STAT3660`，如果你上传到了别处，只改这一行 `%let project_root=...;`。路径不要含 `%` 或 `&`。
-4. 在新会话中运行**整个** `run_all.sas`。不需要先跑 Python，也不需要联网。
-5. 检查 `results/sas/run_all.log` 与 `RUN_STATUS.txt`：状态须为 `COMPLETED`，日志应有 `NOTE: PROJECT_COMPLETED.`；逐个看 `ERROR`、`WARNING`、`NOTE: Invalid data`、`NOTE: ... converted to`、`NOTE: repeats of BY values`。
-6. 打开 `results/sas/analysis.html`，核对 CSV 和 7 张 PNG。下载结果后运行 `python3 tools/check_sas_run.py /实际下载的/results/sas` 自动验收（退出码 0 才算通过）。
+Two minor blemishes, both handled and documented:
 
-重跑会覆盖同名结果并更新完成标记。不要用旧文件的存在代替检查本次日志。
+1. `04_residual_normal_qq.png` is produced by `PROC UNIVARIATE`, which ignores `IMAGENAME`, so the
+   file is not written next to the other plots. It is recovered from `analysis.html` by
+   `tools/extract_pngs.py`; see `docs/FIGURE_MAP.md`.
+2. `DATALABEL` on the region bar chart printed all three statistics at full precision over the
+   axis. It has been removed from `sas/35_inference.sas` and the chart is clean in the latest run.
 
-## 数据与目录
+---
 
-| 路径 | 内容 |
+## Quick start (SAS Studio)
+
+1. Upload the whole `STAT3660/` folder to the SAS Studio **server-side** file area, preserving
+   `data/`, `sas/` and `run_all.sas`.
+2. Use a session with Base SAS, SAS/STAT, ODS Graphics and `PROC IMPORT DBMS=XLSX`. UTF-8 is
+   recommended. `sas/00_environment_check.sas` tests every component the project needs and can be
+   run on its own before anything else.
+3. Open `run_all.sas`. The default path is `/home/&sysuserid/STAT3660`; change that single line only
+   if the folder sits somewhere else. Avoid `%` and `&` in the path.
+4. Run the **whole** program in a fresh session. No network access and no Python are required.
+5. Note that `run_all.sas` redirects its own log with `PROC PRINTTO` and writes results through
+   `ODS HTML5`, so the SAS Studio "Log" and "Results" tabs will look almost empty. Everything lands
+   in `results/sas/`:
+   - `RUN_STATUS.txt` — the first line must be `COMPLETED`
+   - `run_all.log` — the log to inspect
+   - `analysis.html` — every table and figure, self-contained
+   - `assertions.csv` — 29 checks, all `passed=1`
+   - about 25 CSVs, 7 PNGs and the permanent datasets in `datasets/`
+6. After downloading `results/sas/`, verify it independently:
+
+   ```
+   python3 tools/check_sas_run.py results/sas
+   ```
+
+   Exit code 0 means: completion marker present, assertions all passed, row counts match the frozen
+   expectations, and every raw value still equals the archived JSON.
+
+---
+
+## Repository layout
+
+| Path | Contents |
 |---|---|
-| `run_all.sas` | 唯一入口与集中路径配置 |
-| `sas/00_helpers.sas` | 导出、断言、失败即停 |
-| `sas/10_import.sas` | Excel / CSV / 固定宽度 DAT 读取，类型、日期、长字段审计 |
-| `sas/20_merge.sas` | 唯一键、完整连接、未匹配与样本标记 |
-| `sas/30_analysis.sas` | 描述统计、极端值、OLS 回归与诊断图 |
-| `sas/35_inference.sas` | 统计推断：Kruskal-Wallis、ANOVA（Levene/Welch）、双样本 t、相关系数、均值置信区间图 |
-| `sas/snapshot_expectations.sas` | 由冻结原始数据生成的预期行数 |
-| `data/raw/` | 5 份原始 API JSON、下载链接、时间与 SHA-256 清单 |
-| `data/input/` | SAS 实际输入：`economies.xlsx`、`life_expectancy.csv`、`gdp_ppp.dat`、`indicator_notes.csv`、`indicator_vintage.csv`；另附代码映射审计 |
-| `results/sas/` | 真实 SAS 输出：日志、HTML、CSV、PNG（`figures/` 为从 HTML 提取的图） |
-| `validation/python_reference/` | 本地实际执行的 Python 参考数据、统计表与图表 |
-| `docs/DATA_SOURCES.md` | 来源、转换规则、字段字典、连接键与研究限制 |
-| `docs/VALIDATION.md` | 实际本地验证结果与 SAS 尚待验证项 |
-| `docs/REPORT_DRAFT.md` | 15 页报告骨架（按评分表的六节结构） |
-| `docs/PPT_OUTLINE.md` | 10 分钟汇报的 12 页大纲与分工，数字已填好 |
-| `docs/FIGURE_MAP.md` | 17 张提取图与 7 张报告图的对照表 |
-| `docs/STAT3660_Report.docx` | **15 页书面报告（英文，7 图 9 表，数字全部来自身 SAS 输出）** |
-| `docs/STAT3660_Slides.pptx` | **12 页汇报（英文幻灯片 + 中文讲稿备注，含 7 张图）** |
-| `tools/` | 重建输入、独立验证、SAS 输出验收、提取图，以及生成 docx / pptx |
-| `tools/build_report_docx.py` | 从 `results/sas/` 生成报告 .docx（表格数字读 CSV；§4.3–4.4 的检验统计量 SAS 未导出 CSV，需对照 `analysis.html`） |
-| `tools/build_slides_pptx.py` | 从 `results/sas/` 生成汇报 .pptx |
+| `run_all.sas` | Single entry point and the only place a path is configured |
+| `sas/00_helpers.sas` | Export, assertion and fail-fast utilities |
+| `sas/00_environment_check.sas` | Standalone test of REG / GLM / NPAR1WAY / TTEST / SGPLOT+CLM / XLSX |
+| `sas/10_import.sas` | Excel, CSV and fixed-width DAT reading; type, date and long-field audit |
+| `sas/20_merge.sas` | Key uniqueness, full joins, unmatched-record and sample flags |
+| `sas/30_analysis.sas` | Descriptive statistics, extremes, OLS regression and diagnostics |
+| `sas/35_inference.sas` | Kruskal-Wallis, ANOVA (Levene/Welch), two-sample t, correlations, CLM chart |
+| `sas/snapshot_expectations.sas` | Row-count expectations generated from the frozen data |
+| `data/raw/` | 5 archived API responses, download URLs, timestamps and SHA-256 manifest |
+| `data/input/` | The actual SAS inputs: `economies.xlsx`, `life_expectancy.csv`, `gdp_ppp.dat`, `indicator_notes.csv`, `indicator_vintage.csv`, plus a key-mapping audit |
+| `results/sas/` | Real SAS output: log, HTML, CSVs, PNGs (`figures/` holds the extracted copies) |
+| `validation/python_reference/` | Python reference tables and charts used to cross-check the numbers |
+| `docs/DATA_SOURCES.md` | Sources, conversion rules, field dictionary, join keys and research limits |
+| `docs/VALIDATION.md` | What has been verified, by which engine, and what has not |
+| `docs/REPORT_DRAFT.md` | Planning draft of the report (Chinese; same content as the .docx) |
+| `docs/PPT_OUTLINE.md` | Planning draft of the deck, with speaker notes and Q&A prep (Chinese) |
+| `docs/FIGURE_MAP.md` | Which extracted figure goes where in the report |
+| `docs/STAT3660_Report.docx` | The written report (English, 7 figures, 9 tables) |
+| `docs/STAT3660_Slides.pptx` | The slide deck (English slides, speaker notes) |
+| `tools/` | Input rebuild, independent validation, output checks, figure extraction, document build |
 
-数据来源及定义：[预期寿命](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)、[人均 GDP PPP（2021 年不变国际元）](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)、[经济体 API](https://api.worldbank.org/v2/country?format=json&per_page=400)。保存的 WDI 返回头显示更新于 **2026-10-08**，下载于 **2026-11-08**；选用固定 2023 年截面，下载日期和文件哈希见 `data/raw/manifest.json`。
+---
 
-## 三种输入格式的来历（要能答出来）
+## Data
 
-三种格式都来自**同一套真实公开数据**，不是三个独立调查，也不暗示世行直接发布了这些 DAT/Excel 文件：
+### Sources and snapshot
 
-| 格式 | 文件 | 读取方式 | 承担的内容 |
-|---|---|---|---|
-| Excel | `economies.xlsx` | `PROC IMPORT DBMS=XLSX` | 296 个经济体/汇总项的目录（代码、名称、地区、收入组） |
-| 分隔符 | `life_expectancy.csv` | `DATA` 步 + `INFILE DSD` | 预期寿命观测值 |
-| 定宽原始 | `gdp_ppp.dat` | `DATA` 步 + 列指针 `@1 @5 @10 @21` | 人均 GDP，44 字节定宽，`NA` 为缺失哨兵 |
+Both indicators come from the World Bank **World Development Indicators** (WDI, source 2), annual
+observations for 2023:
 
-另外两份是**真实的源数据字段**，不是为评分造的：`indicator_notes.csv` 是世界银行指标定义原文（最长 1,342 字节），`indicator_vintage.csv` 是 API 返回的 `lastupdated`（2026-10-08）与我们下载快照的日期（2026-11-08），两列都读成 SAS 日期。
+- [Life expectancy at birth, total (years)](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)
+  — `SP.DYN.LE00.IN`
+- [GDP per capita, PPP (constant 2021 international dollars)](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)
+  — `NY.GDP.PCAP.PP.KD`
+- [Country API](https://api.worldbank.org/v2/country?format=json&per_page=400) — 296 entries, of
+  which **217 economies** and **79 regional or income aggregates**
 
-## 评分清单对应
+The five API responses are archived byte for byte with SHA-256 digests and timestamps in
+`data/raw/manifest.json`. The API header reports the series as last updated **2026-10-08**; the
+snapshot was retrieved on **2026-11-08**, 31 days later. WDI values are revised over time, which is
+exactly why an archived snapshot rather than a live download is used. The data are used under the
+[World Bank Dataset Terms of Use](https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets).
 
-| 要求 | 代码位置 | SAS 运行后证据（`results/sas/`） |
+### The three input formats
+
+The project reads three different file formats. All three are **transparent conversions of the same
+public data** — the World Bank does not itself publish these Excel and fixed-width files, and the
+report says so explicitly.
+
+| Format | File | SAS mechanism | Content | Why this format |
+|---|---|---|---|---|
+| Excel | `economies.xlsx` | `PROC IMPORT DBMS=XLSX` | 296 catalogue rows, 6 fields | A catalogue is a table a human maintains and reviews |
+| Delimited | `life_expectancy.csv` | `DATA` step, `INFILE DSD` | 266 life-expectancy records | Narrow value range, easy to inspect by eye |
+| Fixed width | `gdp_ppp.dat` | `DATA` step, column pointers `@1 @5 @10 @21` | 266 GDP records, exactly 44 bytes per line | Mimics a statistical-office export with no header, which must be parsed by position |
+
+Two further inputs carry genuine source content rather than derived values:
+`indicator_notes.csv` holds the official indicator definitions (the longest is 1,342 bytes) and
+`indicator_vintage.csv` holds the API `lastupdated` date together with the retrieval date, both read
+as SAS dates.
+
+---
+
+## Coverage of the assessment checklist
+
+| Requirement | Where it is implemented | Evidence in `results/sas/` |
 |---|---|---|
-| 三种输入格式 | `10_import.sas` I1–I3 | `row_counts.csv`、`metadata_import_types.csv`、`input_types.csv` |
-| 超长字段、缺失值 | `10_import.sas` I4；`20_merge.sas` M3 | `long_field_audit.csv`（1,342 字节 vs 200 字节缓冲的损失）、`analysis_sample_flow.csv` |
-| 字符、数值、日期 | `10_import.sas` I1–I5 | `input_types.csv`、`date_audit.csv`、`indicator_vintage_audit.csv`、`parse_issues.csv` |
-| 合并、重复键、未匹配、行数 | `20_merge.sas` M1–M4 | `duplicates_*.csv`、`merge_audit.csv`、`unmatched_rows.csv`、`row_counts.csv` |
-| 导出 CSV | `run_all.sas` 末段和 `%export_csv` | `final_analysis.csv`（保留全部 217 经济体） |
-| 最大/最小各 4 条 | `30_analysis.sas` C | `life_expectancy_extremes.csv`、`extreme_cutoff_audit.csv`、`extreme_cutoff_ties.csv` |
-| 标题、列标签、单位 | `10_import.sas`、`30_analysis.sas`、`35_inference.sas` 的 `TITLE`/`LABEL`/`PROC PRINT` | `analysis.html` |
-| 条件/循环 | `20_merge.sas` M3 的 IF；`30_analysis.sas` B 的 ARRAY/DO | 样本标记、整理后的描述统计表 |
-| 至少两种可视化（实为 3 类 7 张） | `30_analysis.sas` D；`35_inference.sas` H6 | 散点+回归线、分组箱线图、**带 95% 置信限的柱状图**，以及 4 张回归诊断图 |
-| 两种以上分析（实为统计推断+描述统计+回归） | `30_analysis.sas` B/E/F；`35_inference.sas` H1–H4 | `descriptive_statistics.csv`、`regression_*.csv`、`region_summary.csv`、`analysis.html` 里的 KW/ANOVA/t/相关结果 |
+| Three input formats | `10_import.sas` I1–I3 | `row_counts.csv`, `metadata_import_types.csv`, `input_types.csv` |
+| Over-long field, missing values | `10_import.sas` I4; `20_merge.sas` M3 | `long_field_audit.csv` (1,342 bytes read in full; a 200-byte buffer loses 1,142), `analysis_sample_flow.csv` |
+| Character, numeric and date types | `10_import.sas` I1–I5 | `input_types.csv`, `date_audit.csv`, `indicator_vintage_audit.csv`, `parse_issues.csv` |
+| Merge, duplicate keys, unmatched rows | `20_merge.sas` M1–M4 | `duplicates_*.csv`, `merge_audit.csv`, `unmatched_rows.csv`, `row_counts.csv` |
+| Export to CSV | `run_all.sas` and `%export_csv` | `final_analysis.csv` (all 217 economies retained) |
+| Four largest and four smallest values | `30_analysis.sas` C | `life_expectancy_extremes.csv`, `extreme_cutoff_audit.csv`, `extreme_cutoff_ties.csv` |
+| Headings, column labels and units | `TITLE` / `LABEL` / `PROC PRINT` throughout | `analysis.html` |
+| Conditional statements and loops | `20_merge.sas` M3 (IF); `30_analysis.sas` B (ARRAY/DO) | Sample flags, reshaped descriptive table |
+| At least two kinds of visualisation (actually 3 kinds, 7 charts) | `30_analysis.sas` D; `35_inference.sas` H6 | Scatter with OLS line, grouped box plot, bar chart with 95% confidence limits, plus four regression diagnostics |
+| At least two kinds of analysis (actually summary statistics, inference and regression) | `30_analysis.sas` B/E/F; `35_inference.sas` H1–H4 | `descriptive_statistics.csv`, `region_summary.csv`, `regression_*.csv`, and the KW / ANOVA / t / correlation tables in `analysis.html` |
 
-## 预期核对值与解释边界
+---
 
-冻结数据：Excel **296** 行（217 经济体、79 汇总项），CSV **266** 行，DAT **266** 行；指标连接 **266** 行，加入全部目录后 **296** 行，其中 **30** 行仅有目录且均属汇总项。排除 79 汇总项后保留 **217** 行；寿命缺失 **0**，GDP 缺失 **20**；回归 **197** 行。唯一键、日期解析错误和未找到目录的指标行均应为 **0**。最长说明为 **1,342 字节**；vintage 表 **2** 行。这些是实际本地核对值；SAS 仍须复核。
+## Expected values (use these to check a run)
 
-极端值只排除寿命缺失，按寿命排序，遇并列按代码升序恰取 4 条；另列第四位所有并列成员。缺失不填零、不均值插补、不自动删异常值。HC3 处理标准误的异方差稳健性；CLB 配合 HCC 请求常规和稳健置信区间，普通 ANOVA 仍基于常规 OLS，读取参数表时要分清两套结果。SPEC 是联合模型设定检验，拒绝不能单独归因于异方差。残差、Q-Q、Cook 距离和杠杆值图用于审查模型。地区/收入分组来自下载时目录，不是 2023 历史分类。完整案例可能有选择偏差，模型未控制其他社会经济因素。**地区间检验（KW/ANOVA/t）回答"差异是否大于随机波动"，回归回答"关联有多大"，两者不能互相替代。**
+| Check | Value |
+|---|---|
+| Excel catalogue rows | **296** (217 economies + 79 aggregates) |
+| CSV / DAT rows | **266** / **266** |
+| Indicator join | **266** rows, 0 unmatched |
+| Metadata full join | **296** rows, 30 of which carry only catalogue data (all aggregates) |
+| Aggregates excluded | **79** |
+| Retained economies | **217** |
+| Missing life expectancy / missing GDP | **0** / **20** |
+| Complete-case regression sample | **197** |
+| Longest indicator definition | **1,342** bytes, 1 record truncated by a 200-byte buffer |
+| Vintage rows | **2**, 31 days between source update and retrieval |
+| Region summary rows | **7** |
+| Duplicate keys, date parse errors, unmatched indicator rows | **0** |
+| OLS slope / intercept / R² / RMSE | **5.26717** / **22.56709** / **0.7419** / **3.61339** |
 
-## 本地复现
+---
+
+## Interpretation boundaries
+
+Missing values are never filled with zero and never imputed; the 20 economies without GDP per head
+stay visible in the exported dataset but are outside the regression. Extreme values are identified
+with an explicit, reproducible tie rule (ascending economy code) and are reported rather than
+deleted: 22 of the 197 complete cases are flagged by the Cook's D, leverage or studentized-residual
+screens and **none of them is removed**.
+
+The regression reports both conventional and HC3 heteroskedasticity-consistent inference, and a SPEC
+joint specification test (chi-square = 3.60, df = 2, p = 0.165). Levene's test rejects equal
+variances across regions (p = 0.0001), so the Welch ANOVA is reported alongside the ordinary one
+rather than instead of it. Region and income classifications are a download-time snapshot of the
+catalogue, not a 2023 historical classification. Complete cases may differ systematically from the
+economies with missing data, and education, health expenditure, institutions and geography are
+uncontrolled, so the slope is an association and not a causal effect.
+
+---
+
+## Reproducing everything
 
 ```
-python3 tools/prepare_inputs.py     # 从冻结 JSON 重建全部输入（含 openpyxl 生成 Excel）
-python3 tools/validate_inputs.py    # 45 项独立核对 + Python 参考输出
-python3 tools/check_sas_run.py results/sas   # SAS 跑完后验收
-python3 tools/extract_pngs.py results/sas    # 从 analysis.html 提取图（PNG 没落到磁盘时用）
-python3 tools/build_report_docx.py           # 生成 docs/STAT3660_Report.docx
-python3 tools/build_slides_pptx.py           # 生成 docs/STAT3660_Slides.pptx
+python3 tools/prepare_inputs.py      # rebuild every input from the frozen JSON (openpyxl for the xlsx)
+python3 tools/validate_inputs.py     # 45 independent checks + Python reference output
+python3 tools/check_sas_run.py results/sas   # verify a downloaded SAS run
+python3 tools/extract_pngs.py results/sas    # pull figures out of analysis.html, in document order
+python3 tools/build_report_docx.py           # regenerate docs/STAT3660_Report.docx
+python3 tools/build_slides_pptx.py           # regenerate docs/STAT3660_Slides.pptx
 ```
 
-> 报告正文与幻灯片用英文：课程材料、评分表与所有 SAS 图表标签都是英文。中文的规划稿仍保留在 `docs/REPORT_DRAFT.md` 与 `docs/PPT_OUTLINE.md`，两份内容一致，只是语言不同。
+`prepare_inputs.py` requires `openpyxl`; `validate_inputs.py` requires `pandas`, `numpy`, `scipy`,
+`statsmodels`, `matplotlib` and `openpyxl` (versions in `tools/python-reference-versions.txt`); the
+document builders require `python-docx` and `python-pptx`. Only use
+`prepare_inputs.py --download` when the data must be refreshed, and re-check the sample afterwards.
 
-需要 pandas、numpy、scipy、statsmodels、matplotlib、openpyxl（版本见 `tools/python-reference-versions.txt`）。只有明确需要更新数据时才用 `prepare_inputs.py --download`；刷新后必须重新核对样本与期望行数。
+`FILE_SHA256.txt` covers every tracked file except itself. `data/input/economies.xlsx` is the one
+deliberate exception: openpyxl writes new zip timestamps on every rebuild, so the byte hash changes
+while the cell contents do not. That file is therefore verified cell by cell against
+`countries.json` by `validate_inputs.py`, which is a stricter check than a byte hash.
+
+---
+
+## Notes
+
+- The written report and the slides are in **English**, matching the course materials, the rubric and
+  every axis label produced by SAS. The two planning drafts (`docs/REPORT_DRAFT.md`,
+  `docs/PPT_OUTLINE.md`) are in Chinese; they carry the same content and are kept for the team.
+- The documents are generated from `results/sas/`, so re-running SAS and then re-running the two
+  builders keeps text and tables in step. Statistics that SAS prints to `analysis.html` but does not
+  export (Kruskal-Wallis, ANOVA, Levene, Welch, the t test, the correlations and the SPEC test) are
+  entered by hand in sections 4.3, 4.4 and 4.6 — re-check them if the sample changes.
