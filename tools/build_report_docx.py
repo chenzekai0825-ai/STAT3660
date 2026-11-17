@@ -22,6 +22,16 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
+MEMBERS = [
+    # (name, student id, contribution) -- reorder the rows if the split differs.
+    ('ZHANG Bohan', 's1362832', 'Data acquisition, three input formats, long-field and vintage audit'),
+    ('CHEN Jingwei', 's1364350', 'Cleaning, missing values and sentinel handling, sample flags'),
+    ('LI Zhuohao', 's1361931', 'Merging, row reconciliation, assertion framework'),
+    ('CHEN Zekai', 's1367727', 'Descriptive statistics, extreme values, all seven figures'),
+    ('ZHOU Yilin', 's1362098', 'Inference and regression, report editing'),
+]
+GROUP = '______'   # group number, filled in on the cover page
+
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / 'results' / 'sas'
 OUT = ROOT / 'docs' / 'STAT3660_Report.docx'
@@ -209,18 +219,13 @@ body(doc, 'Income and Life Expectancy in 2023:', size=20, bold=True,
      align=WD_ALIGN_PARAGRAPH.CENTER, space_after=4)
 body(doc, 'A Cross-Section of 217 World Bank Economies', size=20, bold=True,
      align=WD_ALIGN_PARAGRAPH.CENTER, space_after=40)
-body(doc, 'Group Number: ______', size=12, align=WD_ALIGN_PARAGRAPH.CENTER, space_after=4)
+body(doc, f'Group Number: {GROUP}', size=12, align=WD_ALIGN_PARAGRAPH.CENTER, space_after=4)
 body(doc, 'Date: 6 December 2026', size=12, align=WD_ALIGN_PARAGRAPH.CENTER, space_after=30)
 
 table(doc,
       ['#', 'Name', 'Student ID', 'Main contribution'],
-      [[str(i), '', '', part] for i, part in enumerate([
-          'Data acquisition, three input formats, long-field and vintage audit',
-          'Cleaning, missing values and sentinel handling, sample flags',
-          'Merging, row reconciliation, assertion framework',
-          'Descriptive statistics, extreme values, visualisation',
-          'Statistical inference and regression, report editing'], start=1)],
-      widths=[1.0, 4.0, 3.5, 7.5], font_size=10)
+      [[str(i), name, sid, part] for i, (name, sid, part) in enumerate(MEMBERS, start=1)],
+      widths=[1.0, 4.2, 2.8, 8.0], font_size=10)
 
 body(doc, '')
 body(doc, 'All results in this report were produced by the SAS program in run_all.sas '

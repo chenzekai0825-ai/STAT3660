@@ -18,6 +18,16 @@ from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.util import Emu, Inches, Pt
 
+MEMBERS = [
+    # (name, student id, contribution) -- reorder the rows if the split differs.
+    ('ZHANG Bohan', 's1362832', 'Data acquisition, three input formats, long-field and vintage audit'),
+    ('CHEN Jingwei', 's1364350', 'Cleaning, missing values and sentinel handling, sample flags'),
+    ('LI Zhuohao', 's1361931', 'Merging, row reconciliation, assertion framework'),
+    ('CHEN Zekai', 's1367727', 'Descriptive statistics, extreme values, all seven figures'),
+    ('ZHOU Yilin', 's1362098', 'Inference and regression, report editing'),
+]
+GROUP = '______'   # group number, filled in on the cover page
+
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / 'results' / 'sas'
 OUT = ROOT / 'docs' / 'STAT3660_Slides.pptx'
@@ -168,12 +178,11 @@ textbox(s, 0.9, 1.15, 11.6, 1.0, 'Income and Life Expectancy in 2023', size=40, 
         color=WHITE)
 textbox(s, 0.9, 2.25, 11.6, 0.8, 'A cross-section of 217 World Bank economies',
         size=24, color=RGBColor(0xBD, 0xD7, 0xEE))
-textbox(s, 0.9, 3.15, 11.6, 0.6, 'STAT 3660SEF SAS Programming  |  2026 Autumn  |  Group ______',
+textbox(s, 0.9, 3.15, 11.6, 0.6,
+        f'STAT 3660SEF SAS Programming  |  2026 Autumn  |  Group {GROUP}',
         size=16, color=RGBColor(0xBD, 0xD7, 0xEE))
-textbox(s, 0.9, 4.7, 11.6, 0.5,
-        'Member 1  |  Member 2  |  Member 3  |  Member 4  |  Member 5', size=18, color=GREY)
-textbox(s, 0.9, 5.25, 11.6, 0.5, 'Student IDs: replace this line with the five IDs',
-        size=14, italic=True, color=FAINT)
+textbox(s, 0.9, 4.55, 11.6, 0.5, '   |   '.join(m[0] for m in MEMBERS), size=16, color=GREY)
+textbox(s, 0.9, 5.05, 11.6, 0.5, '   |   '.join(m[1] for m in MEMBERS), size=13, color=FAINT)
 textbox(s, 0.9, 6.2, 11.6, 0.5,
         'SAS 9.04.01M8  |  29 automated assertions passed  |  0 ERROR, 0 WARNING in the log',
         size=13, color=BLUE)
@@ -428,12 +437,8 @@ s = prs.slides.add_slide(BLANK)
 slide_title(s, 'Who did what, and how to reproduce it',
             'One command rebuilds the inputs, one command runs the analysis')
 table(s, ['Member', 'Responsibility'],
-      [['A', 'Data acquisition, three input formats, long-field and vintage audit'],
-       ['B', 'Cleaning, missing values and sentinel handling, sample flags'],
-       ['C', 'Merging, row reconciliation, assertion framework'],
-       ['D', 'Descriptive statistics, extreme values, all seven figures'],
-       ['E', 'Inference and regression, report editing']],
-      left=0.65, top=1.7, width=7.3, height=3.0, font=13, col_widths=[1.4, 5.9])
+      [[f'{name}  ({sid})', part] for name, sid, part in MEMBERS],
+      left=0.65, top=1.7, width=8.6, height=3.0, font=12, col_widths=[3.4, 5.9])
 bullets(s, [
     'prepare_inputs.py rebuilds every input offline from the frozen JSON',
     'validate_inputs.py runs 45 independent Python checks',
