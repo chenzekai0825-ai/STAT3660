@@ -11,6 +11,7 @@ The .pptx is a local deliverable: it is git-ignored and never committed, because
 the slides are submitted to OLE rather than kept in the repository.
 """
 import csv
+import sys
 from pathlib import Path
 
 from pptx import Presentation
@@ -30,7 +31,11 @@ GROUP = '______'   # group number, filled in on the cover page
 
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / 'results' / 'sas'
-OUT = ROOT / 'docs' / 'STAT3660_Slides.pptx'
+# First command-line argument (optional) redirects the output, e.g.
+#     python3 tools/build_slides_pptx.py ../../pre
+_out_dir = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else ROOT / 'docs'
+_out_dir.mkdir(parents=True, exist_ok=True)
+OUT = _out_dir / 'STAT3660_Slides.pptx'
 
 NAVY = RGBColor(0x1F, 0x3B, 0x57)
 BLUE = RGBColor(0x2E, 0x75, 0xB6)

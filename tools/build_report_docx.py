@@ -12,6 +12,7 @@ The prose is written in English to match the course materials and the SAS
 figure labels; the planning notes in docs/REPORT_DRAFT.md stay in Chinese.
 """
 import csv
+import sys
 from pathlib import Path
 
 from docx import Document
@@ -34,7 +35,11 @@ GROUP = '______'   # group number, filled in on the cover page
 
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / 'results' / 'sas'
-OUT = ROOT / 'docs' / 'STAT3660_Report.docx'
+# First command-line argument (optional) redirects the output, e.g.
+#     python3 tools/build_report_docx.py ../../pre
+_out_dir = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else ROOT / 'docs'
+_out_dir.mkdir(parents=True, exist_ok=True)
+OUT = _out_dir / 'STAT3660_Report.docx'
 
 
 # ---------------------------------------------------------------- data access
