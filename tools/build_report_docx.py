@@ -401,6 +401,8 @@ table(doc,
         'How large is the association, and are the residuals suspicious?',
         'Gives an interpretable effect size together with its uncertainty']],
       widths=[3.0, 5.6, 3.6, 4.4], font_size=8.5, align_right_from=99)
+caption(doc, 'Table 3  The three analyses, the SAS procedures used for each, and the question each '
+             'one answers.')
 
 body(doc, 'The three are complements rather than repetitions. Kruskal-Wallis assumes no particular '
           'distribution, which matters for regions with very few members. ANOVA decomposes the '
@@ -418,6 +420,57 @@ body(doc, 'Four diagnostics are examined: residuals against fitted values, a nor
           'observation is deleted, and the downloaded region and income classifications are labelled '
           'as a snapshot of the catalogue rather than as a 2023 historical classification.')
 
+heading(doc, '3.5  What "OLS with HC3, CLB and SPEC" means, and why all four are reported', 2)
+
+body(doc, 'One line in the methods summary compresses four different things, and the difference '
+          'matters because only one of them is a test. OLS is the estimator: it chooses the slope '
+          'and the intercept that minimise the sum of squared residuals. HC3 is not a test but a '
+          'way of computing the standard error: it stays valid when the residual variance changes '
+          'with the regressors, which is the expected situation when income per head spans two '
+          'orders of magnitude. CLB is not a test either: it asks SAS to print confidence limits '
+          'for the coefficients, and together with HCC it prints both the conventional limits and '
+          'the HC3-based limits. Only SPEC is a test. It is the regression specification test of '
+          'the first two moments: the null hypothesis is that the conditional mean is linear in '
+          'the regressors and that the error variance is constant.')
+
+body(doc, 'Reporting all four is deliberate rather than decorative. If the two sets of standard '
+          'errors had differed substantially, the conventional t statistics would have overstated '
+          'precision and the honest conclusion would have rested on the HC3 column alone. They do '
+          'not differ much here, and that is itself a finding: the slope standard error is '
+          f'{num(p_slope["StdErr"]):.3f} conventionally against {num(p_slope["HCStdErr"]):.3f} under '
+          f'HC3, and the 95% interval moves only from [{num(p_slope["LowerCL"]):.2f}, '
+          f'{num(p_slope["UpperCL"]):.2f}] to [{num(p_slope["HCLowerCL"]):.2f}, '
+          f'{num(p_slope["HCUpperCL"]):.2f}]. The association therefore survives the correction, '
+          'and a reader can see that it does instead of having to take it on trust.')
+
+table(doc,
+      ['Inference', 'Slope SE', '95% CI of the slope', 'What it assumes'],
+      [['Conventional OLS', f'{num(p_slope["StdErr"]):.3f}',
+        f'[{num(p_slope["LowerCL"]):.3f}, {num(p_slope["UpperCL"]):.3f}]',
+        'Constant error variance'],
+       ['HC3 (heteroskedasticity-consistent)', f'{num(p_slope["HCStdErr"]):.3f}',
+        f'[{num(p_slope["HCLowerCL"]):.3f}, {num(p_slope["HCUpperCL"]):.3f}]',
+        'Only that errors are uncorrelated with the regressors']],
+      widths=[5.4, 2.4, 4.4, 5.0], font_size=9)
+caption(doc, 'Table 4  The two sets of inference reported for the same slope estimate, N = 197. '
+             'The SPEC test of the first two moments does not reject (chi-square = 3.60, df = 2, '
+             'p = 0.165), so there is no evidence against the linear-and-homoskedastic specification.')
+
+body(doc, 'This subsection was written in response to a question raised in class: which of the '
+          'four abbreviations actually names a test, and why the report presents both the '
+          'conventional and the HC3 inference instead of choosing one of them. The short answer is '
+          'that only SPEC is a test, that HC3 and CLB are respectively a standard-error correction '
+          'and a confidence-interval request applied to the same OLS estimate, and that showing both '
+          'columns lets the reader see for themselves that the conclusion does not depend on the '
+          'correction.', italic=True)
+
+body(doc, 'The SPEC result is the one that licenses the conventional model at all. A rejection '
+          'would have meant that the functional form or the variance assumption is wrong, and HC3 '
+          'only repairs the second of those two; it cannot repair a misspecified mean. Because the '
+          'test does not reject, the log-linear form can be retained, while the limitation remains '
+          'that SPEC has no power against omitted variables and therefore cannot rule out '
+          'confounding.')
+
 # ---- 4 Results --------------------------------------------------------------
 heading(doc, '4  Results', 1)
 heading(doc, '4.1  Descriptive statistics', 2)
@@ -434,7 +487,7 @@ table(doc,
         f'{num(gdp["q1"]):,.0f}', f'{num(gdp["q3"]):,.0f}', f'{num(gdp["minimum"]):,.0f}',
         f'{num(gdp["maximum"]):,.0f}']],
       widths=[4.2, 1.2, 1.5, 2.2, 2.2, 2.0, 1.9, 1.9, 1.6, 1.8], font_size=8.5)
-caption(doc, 'Table 3  Summary statistics, 2023. Each variable uses its own non-missing '
+caption(doc, 'Table 5  Summary statistics, 2023. Each variable uses its own non-missing '
              'observations; monetary values are PPP constant 2021 international dollars.')
 
 body(doc, f'Life expectancy is left-skewed, with its long tail at the low end, while GDP per head '
@@ -451,7 +504,7 @@ table(doc,
         ('missing' if not e['gdp_ppp'].strip() else f'{num(e["gdp_ppp"]):,.0f}')]
        for e in low + high],
       widths=[2.6, 6.0, 3.2, 4.4], font_size=8.5, align_right_from=2)
-caption(doc, 'Table 4  The four lowest and four highest life expectancies, 2023. Ties at the '
+caption(doc, 'Table 6  The four lowest and four highest life expectancies, 2023. Ties at the '
              'fourth position would be broken by ascending economy code; the full tie audit is '
              'exported separately.')
 
@@ -475,7 +528,7 @@ table(doc,
        ['Welch ANOVA (unequal variances)', 'F(6, 22.02) = 46.51', '< 0.0001',
         'The conclusion survives dropping the assumption']],
       widths=[5.4, 5.0, 2.2, 4.0], font_size=8.5, align_right_from=99)
-caption(doc, 'Table 5  Tests of equal life expectancy across the seven World Bank regions, 2023.')
+caption(doc, 'Table 7  Tests of equal life expectancy across the seven World Bank regions, 2023.')
 
 body(doc, 'The Levene result is the interesting one. Because it rejects equal variances, the '
           'ordinary F test is not strictly valid here; the Welch version relaxes that assumption '
@@ -494,7 +547,7 @@ table(doc,
         f'[{num(r["lclm_mean"]):.2f}, {num(r["uclm_mean"]):.2f}]']
        for r in sorted(regions, key=lambda r: -num(r['mean_life']))],
       widths=[7.4, 1.8, 2.4, 4.0], font_size=8.5, align_right_from=1)
-caption(doc, 'Table 6  Mean life expectancy and 95% confidence limits by region, 2023.')
+caption(doc, 'Table 8  Mean life expectancy and 95% confidence limits by region, 2023.')
 
 body(doc, 'The confidence widths matter as much as the ordering. North America, with three '
           'economies, has an interval roughly ten years wide, and South Asia with six economies is '
@@ -512,7 +565,7 @@ table(doc,
       [['High income', '86', '79.81', '4.18', '9.97', '[8.63, 11.30]'],
        ['Not high income', '131', '69.84', '5.76', '', '']],
       widths=[3.8, 1.6, 4.0, 1.8, 2.4, 4.6], font_size=9, align_right_from=1)
-caption(doc, 'Table 7  Two-sample comparison, 2023. Satterthwaite t(212.86) = 14.75, p < 0.0001; '
+caption(doc, 'Table 9  Two-sample comparison, 2023. Satterthwaite t(212.86) = 14.75, p < 0.0001; '
              'the folded F test for equal variances gives 1.90 with p = 0.0016, so the unequal '
              'variance row is the appropriate one.')
 
@@ -539,7 +592,7 @@ table(doc,
         f'[{num(p_slope["LowerCL"]):.3f}, {num(p_slope["UpperCL"]):.3f}]',
         f'[{num(p_slope["HCLowerCL"]):.3f}, {num(p_slope["HCUpperCL"]):.3f}]']],
       widths=[3.6, 2.0, 1.6, 1.8, 3.0, 3.0, 3.0], font_size=8.5)
-caption(doc, f'Table 8  OLS estimates, N = {n_model}. R-squared = {r2:.4f}, adjusted R-squared = '
+caption(doc, f'Table 10  OLS estimates, N = {n_model}. R-squared = {r2:.4f}, adjusted R-squared = '
              f'{adj_r2:.4f}, root mean square error = {rmse:.3f} years.')
 
 body(doc, f'The slope is the quantity of interest. A one-unit increase in ln(GDP per capita) is '
@@ -568,7 +621,7 @@ body(doc, f'The SPEC test of the first two moments does not reject (chi-square =
 body(doc, f'Applying the screening rules flags {len(flagged)} of the {n_model} complete cases '
           f'({100 * len(flagged) / n_model:.1f}%): {len(cook_flags)} exceed the Cook\'s distance '
           f'threshold, {len(lev_flags)} exceed the leverage threshold, and {len(res_flags)} have a '
-          f'studentized residual beyond two. None were removed. Table 9 lists the three most '
+          f'studentized residual beyond two. None were removed. Table 11 lists the three most '
           f'influential cases.')
 table(doc,
       ['Economy', 'Observed', 'Fitted', 'Residual', 'Studentized residual', "Cook's D"],
@@ -576,7 +629,7 @@ table(doc,
         f'{num(w["residual"]):.2f}', f'{num(w["rstudent"]):.2f}', f'{num(w["cooks_d"]):.4f}']
        for w in worst],
       widths=[5.0, 2.2, 2.2, 2.2, 3.4, 2.4], font_size=9, align_right_from=1)
-caption(doc, 'Table 9  The three most influential economies in the regression. Residual = observed '
+caption(doc, 'Table 11  The three most influential economies in the regression. Residual = observed '
              'minus fitted life expectancy in years.')
 
 body(doc, 'All three live several years less than their income level would predict, and Nigeria\'s '
